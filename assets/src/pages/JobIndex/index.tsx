@@ -1,5 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom'
-import { useJobs } from '../../hooks'
+import { useJobs } from '../../api'
 import { Link } from '@welcome-ui/link'
 
 function JobIndex() {
