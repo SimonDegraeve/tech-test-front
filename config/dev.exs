@@ -84,6 +84,4 @@ config :swoosh, :api_client, false
 
 # Configures the CORS headers
 config :cors_plug,
-  origin: ["http://localhost"],
-  max_age: 86400,
-  methods: ["GET", "POST"]
+  origins: "*"
