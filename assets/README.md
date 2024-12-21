@@ -1,50 +1,96 @@
-# React + TypeScript + Vite
+# Frontend technical test
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Design and implement a scalable, real-time Kanban board application for managing candidate workflows
 
-Currently, two official plugins are available:
+## Project overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Features
 
-## Expanding the ESLint configuration
+- Drag-and-drop functionality for cards:
+  - [ ] Within the same column
+  - [ ] Between different columns
+  - [ ] With proper handling of a11y
+- [ ] Proper handling of card positioning and ordering
+- [ ] Real-time synchronization between users
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Performances
 
-- Configure the top-level `parserOptions` property like this:
+- [ ] Centralized cache with optimistic and atomic updates
+- [ ] Design for scale (DOM size, minimum re-renders, hours of usage without a reload)
+- [ ] Handle thousands of candidates per column efficiently
+- [ ] Handle hundreds of operations made by concurrent users
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Architecture
+
+The given template was a "simple" Single Page Application using React without any server-side rendering or other hybrid approach, so I kept it that way since considering another approach would require more context and would probably be outside the scope of this test.
+
+This is the file structure of the SPA:
+
+```
+|--- public                     // Static files
+|--- src                        // Source files
+|    |--- api                   // API calls and data manipulation
+|    |--- components            // Reusable components
+|    |--- pages                 // Pages entry points
+|    |--- test                  // Unit tests
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+<!-- TODO -->
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Technical decisions and trade-offs
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+#### Backend
+
+- Use [docker-compose](https://docs.docker.com/compose/) to isolate the PostgreSQL database required fro the project from the host
+- Added `plug-cors` dependency to allow requests from the frontend (allow all origins in development mode, can be allowed to some specific origins in production). This was the most popular CORS library for Elixir and Phoenix (https://hex.pm/packages?search=cors&sort=recent_downloads)
+- Created a `run-dev` bash script to easily start the backend and the frontend in parallel
+
+#### Frontend
+
+- As a Drag-and-drop behavior is complex and requires a lot of effort to implement from scratch, I decided to look for a library that would already implement the core functionality and would allow me to focus on the application logic.
+
+  The criteria for choosing the library were (in no particular order as all of them are important):
+
+  - Active development
+  - Licence and release frequency/quality
+  - Good documentation
+  - Wide browser support (including Mobile)
+  - Top performance
+  - Top accessibility
+  - React-based or compatible
+  - Style agnostic or customizable or based on styled-components as it is the CSS-in-JS library used in the project
+
+The libraries I considered were:
+
+- react-aria/dnd (https://react-spectrum.adobe.com/react-aria/dnd.html)
+- react-beautiful-dnd (https://github.com/atlassian/react-beautiful-dnd)
+- pragmatic-drag-and-drop (https://github.com/atlassian/pragmatic-drag-and-drop)
+- dnd-kit (https://github.com/clauderic/dnd-kit)
+
+I quickly discarded `react-aria/dnd` as the maintainability seemed low (ex: introduce breaking changes in minor version https://www.reddit.com/r/reactjs/comments/1css7vy/comment/lpgh3gs).
+
+I also discarded `react-beautiful-dnd` as it has been deprecated in favor of `pragmatic-drag-and-drop`.
+
+`pragmatic-drag-and-drop` was a very compelling option as it is developed by Atlassian, so very much battle-tested, but the styling was quite opinionated and using a different Css-in-JS library (Emotion).
+
+I settled on `dnd-kit` because it met all the criteria and the documentation was very good.
+
+### Future improvements
+
+- Internationalization
+- Dark mode
+
+<!-- TODO -->
+
+## Setup instructions
+
+Locally:
+
+- Run `mix setup` to install and setup dependencies
+- Run `./run-dev` to start the project in Development mode (backend on port 4000 and frontend on port 5173)
+
+<!-- TODO: add live demo link -->
+
+```
+
 ```
