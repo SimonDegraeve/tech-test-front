@@ -32,7 +32,7 @@ This is the file structure of the SPA:
 |    |--- api                   // API calls and data manipulation
 |    |--- components            // Reusable components
 |    |--- pages                 // Pages entry points
-|    |--- test                  // Unit tests
+|    |--- test                  // Testing setup and utilities
 ```
 
 <!-- TODO -->
@@ -60,25 +60,33 @@ This is the file structure of the SPA:
   - React-based or compatible
   - Style agnostic or customizable or based on styled-components as it is the CSS-in-JS library used in the project
 
-The libraries I considered were:
+  The libraries I considered were:
 
-- react-aria/dnd (https://react-spectrum.adobe.com/react-aria/dnd.html)
-- react-beautiful-dnd (https://github.com/atlassian/react-beautiful-dnd)
-- pragmatic-drag-and-drop (https://github.com/atlassian/pragmatic-drag-and-drop)
-- dnd-kit (https://github.com/clauderic/dnd-kit)
+  - react-aria/dnd (https://react-spectrum.adobe.com/react-aria/dnd.html)
+  - react-beautiful-dnd (https://github.com/atlassian/react-beautiful-dnd)
+  - pragmatic-drag-and-drop (https://github.com/atlassian/pragmatic-drag-and-drop)
+  - dnd-kit (https://github.com/clauderic/dnd-kit)
 
-I quickly discarded `react-aria/dnd` as the maintainability seemed low (ex: introduce breaking changes in minor version https://www.reddit.com/r/reactjs/comments/1css7vy/comment/lpgh3gs).
+  I quickly discarded `react-aria/dnd` as the maintainability seemed low (ex: introduce breaking changes in minor version https://www.reddit.com/r/reactjs/comments/1css7vy/comment/lpgh3gs).
 
-I also discarded `react-beautiful-dnd` as it has been deprecated in favor of `pragmatic-drag-and-drop`.
+  I also discarded `react-beautiful-dnd` as it has been deprecated in favor of `pragmatic-drag-and-drop`.
 
-`pragmatic-drag-and-drop` was a very compelling option as it is developed by Atlassian, so very much battle-tested, but the styling was quite opinionated and using a different Css-in-JS library (Emotion).
+  `pragmatic-drag-and-drop` was a very compelling option as it is developed by Atlassian, so very much battle-tested, but the styling was quite opinionated and using a different Css-in-JS library (Emotion).
 
-I settled on `dnd-kit` because it met all the criteria and the documentation was very good.
+  I settled on `dnd-kit` because it met all the criteria and the documentation was very good. // pattern ref forwarding
+
+-
 
 ### Future improvements
 
 - Internationalization
 - Dark mode
+- Offline mode
+- Authentication
+- Zod or Yup for validation
+- Virtual lists
+- Monitoring/Logging/Error tracking
+- Multi select
 
 <!-- TODO -->
 

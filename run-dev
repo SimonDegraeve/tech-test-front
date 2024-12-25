@@ -2,7 +2,7 @@
 (
     trap 'kill 0' SIGINT; \
     # Start the backend
-    docker compose up -d && mix phx.server & \
+    docker compose up -d && mix setup && mix phx.server & \
     # Start the frontend
     cd assets && yarn && yarn dev \
 ) 
