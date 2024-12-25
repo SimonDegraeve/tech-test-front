@@ -1,7 +1,9 @@
 import { Box } from '@welcome-ui/box'
 import { Flex } from '@welcome-ui/flex'
 import { Link } from '@welcome-ui/link'
+import { Suspense } from 'react'
 import { Link as RouterLink, Outlet } from 'react-router-dom'
+import Loader from '../Loader'
 
 function Layout() {
   return (
@@ -14,7 +16,9 @@ function Layout() {
         </Flex>
       </Box>
       <Flex flexGrow={1} flexDirection="column">
-        <Outlet />
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
       </Flex>
     </Flex>
   )
