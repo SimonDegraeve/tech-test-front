@@ -177,8 +177,8 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
       onDragOver={onDragOver}
       onDragCancel={onDragCancel}
     >
-      <Flex p={20} flexGrow={1}>
-        <Flex gap={10}>
+      <Flex p={20} overflow="hidden">
+        <Flex gap={10} overflow="hidden">
           <DragOverlay>
             {internalActiveItem ? (
               <Item style={{ transform: 'rotate(3deg)' }}>{renderCard(internalActiveItem)}</Item>
@@ -268,13 +268,14 @@ function CardColumn<Column extends string, Item extends ItemData>({
   const itemsCount = items.filter(item => !isEmptyItemPlaceholder(item)).length
 
   return (
-    <Box
+    <Flex
       w={300}
       border={1}
       backgroundColor="white"
       borderColor="neutral-30"
       borderRadius="md"
       overflow="hidden"
+      flexDirection="column"
       data-testid={`column-${column}`}
     >
       <Flex
@@ -293,18 +294,20 @@ function CardColumn<Column extends string, Item extends ItemData>({
         <Badge data-testid={`column-counter-${column}`}>{itemsCount}</Badge>
       </Flex>
 
-      <Flex direction="column" p={10} minHeight={100} gap={10}>
-        {items.map(item => (
-          <SortableItem
-            key={item.id}
-            data={item}
-            style={item.id === activeItem?.id ? { opacity: 0.5 } : {}}
-          >
-            {isEmptyItemPlaceholder(item) ? null : renderCard(item)}
-          </SortableItem>
-        ))}
+      <Flex overflow="hidden" h="100%">
+        <Flex direction="column" p={10} minHeight={100} gap={10} overflow="auto">
+          {items.map(item => (
+            <SortableItem
+              key={item.id}
+              data={item}
+              style={item.id === activeItem?.id ? { opacity: 0.5 } : {}}
+            >
+              {isEmptyItemPlaceholder(item) ? null : renderCard(item)}
+            </SortableItem>
+          ))}
+        </Flex>
       </Flex>
-    </Box>
+    </Flex>
   )
 }
 

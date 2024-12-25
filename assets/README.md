@@ -40,7 +40,7 @@ This is the file structure of the SPA:
 #### Backend
 
 - Use [docker-compose](https://docs.docker.com/compose/) to isolate the PostgreSQL database required for the project from the host
-- Added `plug-cors` dependency to allow requests from the frontend (allow all origins in development mode, can be allowed to some specific origins in production). This was the most popular CORS library for Elixir and Phoenix (https://hex.pm/packages?search=cors&sort=recent_downloads)
+- Added `plug-cors` dependency to allow requests from the frontend (allow all origins in development mode, should be allowed to some specific origins in production). This was the most popular CORS library for Elixir and Phoenix (https://hex.pm/packages?search=cors&sort=recent_downloads)
 - Created a `run-dev` bash script to easily start the backend and the frontend in parallel
 
 #### Frontend
@@ -73,27 +73,34 @@ This is the file structure of the SPA:
 
   I settled on `dnd-kit` because it met all the criteria and the documentation was very good. // pattern ref forwarding
 
-- I created a generic `CardOrganizer` component (data agnostic) that handles the drag-and-drop logic and the rendering of the columns and cards. This allows for a more modular and reusable codebase. The columns are memoized to avoid unnecessary re-renders (with the assumption that the data displays inside the card (ex: user email) will not change during the lifecycle of the component). I used the reference forwarding pattern to allow the parent component to control the state of the cards and columns without too many wrapper nodes (useful for display the card overlay).
+- I created a generic `CardOrganizer` component (data agnostic) that handles the drag-and-drop logic and the rendering of the columns and cards. This allows for a more modular and reusable codebase. The columns are memoized to avoid unnecessary re-renders (with the assumption that the data displays inside the card (ex: user email) will not change during the lifecycle of the component). I used the reference forwarding pattern to allow the parent component to control the state of the cards and columns without too many wrapper nodes (useful for display the card overlay). I created a system of placeholder for empty lists so the user can trigger the collision detection and drop the card in an empty column.
 
-- For the calculation of the new candidate position after reordering, I used an algorithm to set the candidate new position to be half-way between the previous and the next candidate in the same column. This way the user can reorder the cards multiple times without the need to shift the position of all the other cards, this is efficient but is not unlimited as the position of the cards will ultimately converge to 1 if the user keeps reordering the cards.
+- For the calculation of the new candidate position after reordering, I used an algorithm to set the candidate new position to be half-way between the previous and the next candidate in the same column. This way the user can reorder the cards multiple times without the need to shift the position of all the other cards, this is efficient but is not unlimited as the position of the cards will ultimately converge to 1 if the user keeps reordering the cards. The maximum interval between two positions is 16384 (value taken from the backend DB that allow up to 128 changes, √16384=128)
 
-- I updated the design of the columns to take the full height of the screen to get the same design no matter the number of cards in the columns. I also added an animation to rotate the dragged card to give a visual feedback to the user and created a semi transparent card preview to show where the card will be dropped. I also used the theme from the welcome-ui design system to have a consistent design with the branding (ex: yellow outline when moving cards with the keyboard).
+- I used the features from `react-query` to handle a centralized cache with optimistic and atomic updates. I did not invalidate the cache after a mutation, as I assume that a successful PATCH call means the client update can be trusted. I kept the default query options to re-fetch the data when the window is focused to keep the data up-to-date.
 
-- Loading state handled with Suspense and a nice looking loader, so the user knows can differentiate between loading and empty state (ex: candidates count being 0 while loading, can be confusing for the user).
+- I updated the design of the columns to take the full height of the screen to get the same design no matter the number of cards in the columns. Columns are also independently scrollable while displaying all essential info (page title, column title, etc) so the user can align cards from different columns as they please (ex: show beginning of first column and end of second column at the same time). I also added an animation to rotate the dragged card to give a visual feedback to the user and created a semi transparent card preview to show where the card will be dropped. I also used the theme from the welcome-ui design system to have a consistent design with the branding (ex: yellow outline when moving cards with the keyboard).
+
+- Loading state handled with React (Suspense)[https://react.dev/reference/react/Suspense] and a nice looking loader, so the user knows can differentiate between loading and empty state (ex: candidates count being 0 while loading, can be confusing for the user).
 
 - I used [`mock-service-wortker`](https://mswjs.io/) to mock the API calls and data manipulation. This allow fine-grained control over the API responses and the ability to test edge network cases and error handling. It is more powerful than mocking `react-query`
 
 ### Future improvements
 
-- Authentication
-- Internationalization
-- Offline mode
-- Zod or Yup for validation of any data coming from outside the web application
-- Virtual list rendering for card columns
-- Monitoring/logging/error tracking (with Sentry, Datadog, etc)
-- Support selecting multiple cards at once
-- Get total number of candidates per status, as the backend is paginated, we would need an endpoint to get the total number of candidates and not rely on the partial number of candidates returned by the endpoint
+Related to the features:
+
 - Load more candidates on column scroll (load per column as the backend endpoint returns date per column)
+- Support selecting multiple cards at once
+- Virtual list rendering for card columns
+- Get total number of candidates per status, as the backend is paginated, we would need an endpoint to get the total number of candidates and not rely on the partial number of candidates returned by the endpoint
+
+General:
+
+- Zod or Yup for validation of any data coming from outside the web application
+- Authentication
+- Offline mode
+- Internationalization
+- Monitoring/logging/error tracking (with Sentry, Datadog, etc)
 - CI/CD pipeline
 
 ## Setup instructions

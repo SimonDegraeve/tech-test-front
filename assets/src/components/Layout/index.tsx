@@ -15,7 +15,7 @@ function Layout() {
           </Link>
         </Flex>
       </Box>
-      <Flex flexGrow={1} flexDirection="column">
+      <Flex flexDirection="column" overflow="hidden">
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
