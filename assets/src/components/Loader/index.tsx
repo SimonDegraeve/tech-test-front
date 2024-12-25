@@ -14,6 +14,7 @@ function Loader() {
         src="/wttj.svg"
         alt="Welcome to the jungle logo"
         style={{
+          width: 400,
           animation: 'pulse 2s infinite ease-in-out',
         }}
       />
