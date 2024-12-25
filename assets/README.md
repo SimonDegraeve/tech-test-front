@@ -83,6 +83,8 @@ This is the file structure of the SPA:
 
 - Loading state handled with React (Suspense)[https://react.dev/reference/react/Suspense] and a nice looking loader, so the user knows can differentiate between loading and empty state (ex: candidates count being 0 while loading, can be confusing for the user).
 
+- Error state handled with (ErrorBoundaries)[https://legacy.reactjs.org/docs/error-boundaries.html] for data load to inform the user of the eventual error and give them the ability to retry the operation. The mutations errors are handled within the component triggering the mutation to give a more specific error message to the user.
+
 - I used [`mock-service-wortker`](https://mswjs.io/) to mock the API calls and data manipulation. This allow fine-grained control over the API responses and the ability to test edge network cases and error handling. It is more powerful than mocking `react-query`
 
 ### Future improvements

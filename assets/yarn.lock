@@ -15,6 +15,27 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
+"@ariakit/core@0.4.14":
+  version "0.4.14"
+  resolved "https://registry.yarnpkg.com/@ariakit/core/-/core-0.4.14.tgz#a8bbefbc80a1781ae739bdf25a4fd9130fbd5089"
+  integrity sha512-hpzZvyYzGhP09S9jW1XGsU/FD5K3BKsH1eG/QJ8rfgEeUdPS7BvHPt5lHbOeJ2cMrRzBEvsEzLi1ivfDifHsVA==
+
+"@ariakit/react-core@0.4.15":
+  version "0.4.15"
+  resolved "https://registry.yarnpkg.com/@ariakit/react-core/-/react-core-0.4.15.tgz#333b9ee0f4c12d3b76db06e2d787987c1e3fae27"
+  integrity sha512-Up8+U97nAPJdyUh9E8BCEhJYTA+eVztWpHoo1R9zZfHd4cnBWAg5RHxEmMH+MamlvuRxBQA71hFKY/735fDg+A==
+  dependencies:
+    "@ariakit/core" "0.4.14"
+    "@floating-ui/dom" "^1.0.0"
+    use-sync-external-store "^1.2.0"
+
+"@ariakit/react@0.4.15":
+  version "0.4.15"
+  resolved "https://registry.yarnpkg.com/@ariakit/react/-/react-0.4.15.tgz#d088faf0e98e59542f3c23c348b6e923a6054208"
+  integrity sha512-0V2LkNPFrGRT+SEIiObx/LQjR6v3rR+mKEDUu/3tq7jfCZ+7+6Q6EMR1rFaK+XMkaRY1RWUcj/rRDWAUWnsDww==
+  dependencies:
+    "@ariakit/react-core" "0.4.15"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.25.9", "@babel/code-frame@^7.26.0":
   version "7.26.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.26.0.tgz#9374b5cd068d128dac0b94ff482594273b1c2815"
@@ -1317,6 +1338,26 @@
   dependencies:
     levn "^0.4.1"
 
+"@floating-ui/core@^1.6.0":
+  version "1.6.8"
+  resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.6.8.tgz#aa43561be075815879305965020f492cdb43da12"
+  integrity sha512-7XJ9cPU+yI2QeLS+FCSlqNFZJq8arvswefkZrYI1yQBbftw6FyrZOxYSh+9S7z7TpeWlRt9zJ5IhM1WIL334jA==
+  dependencies:
+    "@floating-ui/utils" "^0.2.8"
+
+"@floating-ui/dom@^1.0.0":
+  version "1.6.12"
+  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.6.12.tgz#6333dcb5a8ead3b2bf82f33d6bc410e95f54e556"
+  integrity sha512-NP83c0HjokcGVEMeoStg317VD9W7eDlGK7457dMBANbKA6GJZdc7rjujdgqzTaz93jkGgc5P/jeWbaCHnMNc+w==
+  dependencies:
+    "@floating-ui/core" "^1.6.0"
+    "@floating-ui/utils" "^0.2.8"
+
+"@floating-ui/utils@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.8.tgz#21a907684723bbbaa5f0974cf7730bd797eb8e62"
+  integrity sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==
+
 "@humanfs/core@^0.19.1":
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/@humanfs/core/-/core-0.19.1.tgz#17c55ca7d426733fe3c561906b8173c336b40a77"
@@ -2090,6 +2131,24 @@
   dependencies:
     "@welcome-ui/system" "^6.0.0"
 
+"@welcome-ui/box@^6.1.1":
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@welcome-ui/box/-/box-6.1.1.tgz#1617dbe21e64993057b272034e282b7e9ee9f4e2"
+  integrity sha512-+R4al4uUNZuo6q6DP70LvXNe82uFP7Hzm9I6K9GpVp/lc52nnLqoKjr/GIzRnc24cwgCZSz1qH2HS7xh+FK7ig==
+  dependencies:
+    "@welcome-ui/system" "^6.1.1"
+
+"@welcome-ui/button@^6.0.0":
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/@welcome-ui/button/-/button-6.6.0.tgz#3228e0c64a982494b7b836fda1c6b9f3d63e1e6e"
+  integrity sha512-jd3pJrJ/KnYcmN5LER+MkrDce6DG58VgKEc4v0Vp4yoOmjooIwF5ymsv9hED2/Ci3zjT/efzB+kbmgGVDwA9oQ==
+  dependencies:
+    "@ariakit/react" "0.4.15"
+    "@welcome-ui/box" "^6.1.1"
+    "@welcome-ui/loader" "^6.4.0"
+    "@welcome-ui/system" "^6.1.1"
+    "@welcome-ui/utils" "^6.4.0"
+
 "@welcome-ui/card@^6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@welcome-ui/card/-/card-6.0.0.tgz#6dadd873c0f6bc380806a37e333fe107eaa2118c"
@@ -2139,6 +2198,15 @@
     "@welcome-ui/system" "^6.0.0"
     "@welcome-ui/universal-link" "^6.0.0"
 
+"@welcome-ui/loader@^6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@welcome-ui/loader/-/loader-6.4.0.tgz#059dc609aff3f8e930888ddf74ba3aaacc6c02c6"
+  integrity sha512-NnA0Fj+MoXnwVyaUXYpP9NK408IpgWfvVyAD2Vo4mmIvtfdDOuFMINZlNDQHYQ65kwGyF3WDdN4RuNZ7ku/aXQ==
+  dependencies:
+    "@welcome-ui/box" "^6.1.1"
+    "@welcome-ui/shape" "^6.4.0"
+    "@welcome-ui/system" "^6.1.1"
+
 "@welcome-ui/shape@^6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@welcome-ui/shape/-/shape-6.0.0.tgz#810864236abdc7e2e98165d8bc89338e73be1398"
@@ -2148,10 +2216,24 @@
     "@welcome-ui/system" "^6.0.0"
     "@welcome-ui/utils" "^6.0.0"
 
+"@welcome-ui/shape@^6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@welcome-ui/shape/-/shape-6.4.0.tgz#f6b18e2fa83c1e6a8da9dcff3792608bc93e0fe1"
+  integrity sha512-Ezj9TDIQA5UNpE5DO9bd2ivcJGhuJT/xhzvYWdok22NZ18mIX2oK3gPFegIDIe/SR+aSky2T28vSwou7wA5s0Q==
+  dependencies:
+    "@welcome-ui/box" "^6.1.1"
+    "@welcome-ui/system" "^6.1.1"
+    "@welcome-ui/utils" "^6.4.0"
+
 "@welcome-ui/system@^6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@welcome-ui/system/-/system-6.0.0.tgz#113951aa50527afbb1274ac10be552712aa32002"
   integrity sha512-9tZgh9tSLr1Olz00DwOBZ3Qryz0ZpiCR76+hhHMqfNMKr782TC4US7cDHyuQ+fpYqcrYDGfNPlXGfURwS58E5Q==
+
+"@welcome-ui/system@^6.1.1":
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@welcome-ui/system/-/system-6.1.1.tgz#90550037bef7e5381a83d4fef3bd99026abb3478"
+  integrity sha512-beYzunJi4QeFHROrcatuWctrzNP9Gd01bOLatJbx+NmxS9bi8kRqsURMMH47H8g1nqmMagFDZoZws3b0I4PMtQ==
 
 "@welcome-ui/tag@^6.0.0":
   version "6.0.0"
@@ -2182,6 +2264,11 @@
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@welcome-ui/utils/-/utils-6.0.0.tgz#098e0b8cef105d691ed3c9a9f662a094922fd6db"
   integrity sha512-iX8nW4KV55D/K63WMXhWh1rWktGmUsYEHPUOdNI6zB5NpOUcPIN81GqEWQrSXls2VIsR5oLNWlG+ICuB3ECOqQ==
+
+"@welcome-ui/utils@^6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@welcome-ui/utils/-/utils-6.4.0.tgz#6f2dfab13dc6aeb8339b5e42d773e7edd0e27ada"
+  integrity sha512-riVTjXXsd8KLDNEW74Zeq4hNYEls9tcjAgZzjhCnFRzpTxXeIRhDGDOVrKAcvWbjfcElagN0iovgtsfToI/shQ==
 
 "@xstyled/core@^3.8.1":
   version "3.8.1"
@@ -4751,6 +4838,13 @@ react-dom@^18.3.1:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
 
+react-error-boundary@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-5.0.0.tgz#6b6c7e075c922afb0283147e5b084efa44e68570"
+  integrity sha512-tnjAxG+IkpLephNcePNA7v6F/QpWLH8He65+DmedchDwg162JZqx4NmbXj0mlAYVVEd81OW7aFhmbsScYfiAFQ==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -5606,6 +5700,11 @@ url-parse@^1.5.3:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
+
+use-sync-external-store@^1.2.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.4.0.tgz#adbc795d8eeb47029963016cefdf89dc799fcebc"
+  integrity sha512-9WXSPC5fMv61vaupRkCKCxsPxBocVnwakBEkMIHHpkTTg6icbJtg6jzgtLDm4bl3cSHAca52rYWih0k4K3PfHw==
 
 util-deprecate@^1.0.2:
   version "1.0.2"

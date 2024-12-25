@@ -13,6 +13,7 @@ import {
 import { Candidate } from '../../api'
 import CandidateCard from '../../components/Candidate'
 import CardOrganizer, { ColumnUpdate } from '../../components/CardOrganizer'
+import { Flex } from '@welcome-ui/flex'
 
 const candidateStatusColumns: CandidateStatus[] = ['new', 'interview', 'hired', 'rejected']
 
@@ -21,7 +22,7 @@ function JobShow() {
 
   const { job } = useJob(jobId)
   const { candidates } = useCandidates(jobId)
-  const { mutateAsync } = useUpdateCandidate(jobId)
+  const { mutateAsync, isError } = useUpdateCandidate(jobId)
 
   const sortedCandidates = useMemo(() => {
     if (!candidates) return {}
@@ -74,20 +75,29 @@ function JobShow() {
     })
   }
 
+  if (isError) {
+    return <Text variant="h5">Error updating candidate</Text>
+  }
+
   return (
     <>
-      <Box backgroundColor="neutral-70" p={20} alignItems="center">
-        <Text variant="h5" color="white" m={0}>
+      <Box color="neutral-70" backgroundColor="beige-30" p={20} alignItems="center">
+        <Text variant="h5" m={0} maxWidth={1200} margin="auto">
+          <Box as="span" color="neutral-70" fontWeight={500}>
+            Candidates for :{' '}
+          </Box>
           {job?.name}
         </Text>
       </Box>
 
-      <CardOrganizer<CandidateStatus, Candidate>
-        columns={candidateStatusColumns}
-        items={sortedCandidates}
-        onChange={onChange}
-        renderCard={candidate => <CandidateCard candidate={candidate} />}
-      />
+      <Flex overflow="hidden" flexGrow={1} maxWidth={1200} margin="auto">
+        <CardOrganizer<CandidateStatus, Candidate>
+          columns={candidateStatusColumns}
+          items={sortedCandidates}
+          onChange={onChange}
+          renderCard={candidate => <CandidateCard candidate={candidate} />}
+        />
+      </Flex>
     </>
   )
 }

@@ -176,7 +176,7 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
       onDragOver={onDragOver}
       onDragCancel={onDragCancel}
     >
-      <Flex p={20} overflow="hidden">
+      <Flex p={'20 0'} overflow="hidden" flexGrow={1}>
         <Flex gap={10} overflow="hidden">
           <DragOverlay>
             {internalActiveItem ? (
@@ -294,7 +294,7 @@ function CardColumn<Column extends string, Item extends ItemData>({
       </Flex>
 
       <Flex overflow="hidden" h="100%">
-        <Flex direction="column" p={10} minHeight={100} gap={10} overflow="auto">
+        <Flex direction="column" p={10} minHeight={100} gap={10} overflow="auto" w="100%">
           {items.map(item => (
             <SortableItem
               key={item.id}
