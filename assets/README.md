@@ -75,7 +75,7 @@ This is the file structure of the SPA:
 
 - I created a generic `CardOrganizer` component (data agnostic) that handles the drag-and-drop logic and the rendering of the columns and cards. This allows for a more modular and reusable codebase. The columns are memoized to avoid unnecessary re-renders. I used the reference forwarding pattern to allow the parent component to control the state of the cards and columns without too many wrapper nodes (useful for display the card overlay).
 
-- I updated the design of the columns to take the full height of the screen to get the same design no matter the number of cards in the columns. I also added an animation to rotate the dragged card to give a visual feedback to the user and created a semi transparent card preview to show where the card will be dropped.
+- I updated the design of the columns to take the full height of the screen to get the same design no matter the number of cards in the columns. I also added an animation to rotate the dragged card to give a visual feedback to the user and created a semi transparent card preview to show where the card will be dropped. I also use the theme from the welcome-ui design system to have a consistent design with the branding (ex: yellow outline when moving cards with the keyboard).
 
 - I used [`mock-service-wortker`](https://mswjs.io/) to mock the API calls and data manipulation. This allow fine-grained control over the API responses and the ability to test edge network cases and error handling. It is more powerful than mocking `react-query`
 

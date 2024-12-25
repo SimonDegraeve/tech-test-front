@@ -3,8 +3,15 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import JobIndex from './pages/JobIndex'
 import Layout from './components/Layout'
 import JobShow from './pages/JobShow'
+import { createGlobalStyle } from 'styled-components'
 
 const theme = createTheme()
+
+const GlobalStyles = createGlobalStyle`
+* {
+  outline-color: ${theme.colors['primary-40']};
+}
+`
 
 const router = createBrowserRouter([
   {
@@ -19,9 +26,12 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <WuiProvider theme={theme}>
-      <RouterProvider router={router} />
-    </WuiProvider>
+    <>
+      <GlobalStyles />
+      <WuiProvider theme={theme}>
+        <RouterProvider router={router} />
+      </WuiProvider>
+    </>
   )
 }
 
