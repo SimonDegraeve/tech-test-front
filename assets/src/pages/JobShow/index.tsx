@@ -78,7 +78,7 @@ function JobShow() {
     <>
       <Box backgroundColor="neutral-70" p={20} alignItems="center">
         <Text variant="h5" color="white" m={0}>
-          {job?.name ?? 'ㅤ' /** Default to empty character to avoid flash of content */}
+          {job?.name}
         </Text>
       </Box>
 

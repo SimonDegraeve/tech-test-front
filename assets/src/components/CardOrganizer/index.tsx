@@ -284,9 +284,12 @@ function CardColumn<Column extends string, Item extends ItemData>({
         alignItems="center"
         justify="space-between"
       >
-        <Text color="black" m={0} textTransform="capitalize">
-          {renderColumnLabel?.(column, itemsCount) ?? column}
-        </Text>
+        {renderColumnLabel?.(column, itemsCount) ?? (
+          <Text color="black" m={0} textTransform="capitalize" fontWeight="600">
+            {column}
+          </Text>
+        )}
+
         <Badge data-testid={`column-counter-${column}`}>{itemsCount}</Badge>
       </Flex>
 
