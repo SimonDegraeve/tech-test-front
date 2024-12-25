@@ -19,6 +19,7 @@ describe('CardOrganizer', () => {
       A: [
         { id: 1, name: 'Item 1' },
         { id: 2, name: 'Item 2' },
+        { id: 3, name: 'Item 3' },
       ],
       B: [],
       C: [],
@@ -74,7 +75,7 @@ describe('CardOrganizer', () => {
     }
   })
 
-  test('calls onChange with the updated items', async () => {
+  test('calls onChange with the updated items when moving Up', async () => {
     const itemName = defaultProps.items['A'][1].name
 
     const onChange = vi.fn().mockResolvedValue(new Promise(() => {}))
@@ -113,6 +114,54 @@ describe('CardOrganizer', () => {
     expect(onChange).toHaveBeenNthCalledWith(1, {
       from: expect.objectContaining({
         id: 2,
+        sortable: expect.objectContaining({ containerId: 'A' }),
+      }),
+      to: expect.objectContaining({
+        id: 1,
+        sortable: expect.objectContaining({ containerId: 'A' }),
+      }),
+    })
+  })
+
+  test('calls onChange with the updated items when moving Down', async () => {
+    const itemName = defaultProps.items['A'][0].name
+
+    const onChange = vi.fn().mockResolvedValue(new Promise(() => {}))
+
+    const { getByRole, findByText, asFragment, findByRole } = render(
+      <CardOrganizer<(typeof defaultProps.columns)[number], Item>
+        {...defaultProps}
+        onChange={onChange}
+      />
+    )
+
+    // Wait for the item to be rendered
+    expect(await findByRole('button', { name: itemName })).toBeInTheDocument()
+
+    const card = getByRole('button', { name: itemName })
+
+    // Select card
+    act(() => {
+      fireEvent.keyDown(card, { code: 'Space' })
+    })
+
+    // Move card down
+    act(() => {
+      fireEvent.keyDown(card, { code: 'ArrowDown' })
+    })
+    await findByText('Draggable item 1 was moved over droppable area 1.')
+
+    // Commit the change
+    act(() => {
+      fireEvent.keyDown(card, { code: 'Space' })
+    })
+    await findByText('Draggable item 1 was dropped over droppable area 1')
+
+    expect(asFragment()).toMatchSnapshot()
+
+    expect(onChange).toHaveBeenNthCalledWith(1, {
+      from: expect.objectContaining({
+        id: 1,
         sortable: expect.objectContaining({ containerId: 'A' }),
       }),
       to: expect.objectContaining({
