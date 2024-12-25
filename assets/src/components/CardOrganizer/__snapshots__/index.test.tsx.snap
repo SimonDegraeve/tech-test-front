@@ -1,0 +1,285 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`card organizer > calls onChange with the updated items 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bXCLTC gghOHk"
+  >
+    <div
+      class="sc-bXCLTC epIQNw"
+    >
+      <div
+        class="sc-bXCLTC ioIWcI"
+      >
+        <div
+          class="sc-bXCLTC bNzrHL"
+        >
+          <p
+            class="sc-dxcDKg kVbkpz  wui-text"
+            color="black"
+          >
+            A
+          </p>
+          <div
+            class="sc-gvZAcH btjirq"
+          >
+            2
+          </div>
+        </div>
+        <div
+          class="sc-bXCLTC bMHor"
+        >
+          <div
+            aria-describedby="DndDescribedBy-3"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 2
+          </div>
+          <div
+            aria-describedby="DndDescribedBy-3"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 1
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-bXCLTC ioIWcI"
+      >
+        <div
+          class="sc-bXCLTC bNzrHL"
+        >
+          <p
+            class="sc-dxcDKg kVbkpz  wui-text"
+            color="black"
+          >
+            B
+          </p>
+          <div
+            class="sc-gvZAcH btjirq"
+          >
+            0
+          </div>
+        </div>
+        <div
+          class="sc-bXCLTC bMHor"
+        >
+          <div
+            aria-describedby="DndDescribedBy-3"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            role="button"
+            style=""
+            tabindex="0"
+          />
+        </div>
+      </div>
+      <div
+        class="sc-bXCLTC ioIWcI"
+      >
+        <div
+          class="sc-bXCLTC bNzrHL"
+        >
+          <p
+            class="sc-dxcDKg kVbkpz  wui-text"
+            color="black"
+          >
+            C
+          </p>
+          <div
+            class="sc-gvZAcH btjirq"
+          >
+            0
+          </div>
+        </div>
+        <div
+          class="sc-bXCLTC bMHor"
+        >
+          <div
+            aria-describedby="DndDescribedBy-3"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            role="button"
+            style=""
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="DndDescribedBy-3"
+    style="display: none;"
+  >
+    
+    To pick up a draggable item, press the space bar.
+    While dragging, use the arrow keys to move the item.
+    Press space again to drop the item in its new position, or press escape to cancel.
+  
+  </div>
+  <div
+    aria-atomic="true"
+    aria-live="assertive"
+    id="DndLiveRegion-3"
+    role="status"
+    style="position: fixed; top: 0px; left: 0px; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%); white-space: nowrap;"
+  >
+    Draggable item 2 was dropped over droppable area 1
+  </div>
+</DocumentFragment>
+`;
+
+exports[`card organizer > does not call onChange when there are no changes 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bXCLTC gghOHk"
+  >
+    <div
+      class="sc-bXCLTC epIQNw"
+    >
+      <div
+        style="position: fixed; width: 0px; height: 0px; top: 0px; left: 0px; transform: translate3d(0px, 0px, 0) scaleX(1) scaleY(1); transition: transform 250ms ease; z-index: 999;"
+      >
+        <div
+          style="transform: rotate(3deg);"
+        >
+          Item 2
+        </div>
+      </div>
+      <div
+        class="sc-bXCLTC ioIWcI"
+      >
+        <div
+          class="sc-bXCLTC bNzrHL"
+        >
+          <p
+            class="sc-dxcDKg kVbkpz  wui-text"
+            color="black"
+          >
+            A
+          </p>
+          <div
+            class="sc-gvZAcH btjirq"
+          >
+            2
+          </div>
+        </div>
+        <div
+          class="sc-bXCLTC bMHor"
+        >
+          <div
+            aria-describedby="DndDescribedBy-4"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            role="button"
+            style="transition: transform 200ms ease; transform: translate3d(0px, 0px, 0) scaleX(1) scaleY(1);"
+            tabindex="0"
+          >
+            Item 1
+          </div>
+          <div
+            aria-describedby="DndDescribedBy-4"
+            aria-disabled="false"
+            aria-pressed="true"
+            aria-roledescription="sortable"
+            role="button"
+            style="transition: transform 200ms ease; opacity: 0.5; transform: translate3d(0px, 0px, 0) scaleX(1) scaleY(1);"
+            tabindex="0"
+          >
+            Item 2
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-bXCLTC ioIWcI"
+      >
+        <div
+          class="sc-bXCLTC bNzrHL"
+        >
+          <p
+            class="sc-dxcDKg kVbkpz  wui-text"
+            color="black"
+          >
+            B
+          </p>
+          <div
+            class="sc-gvZAcH btjirq"
+          >
+            0
+          </div>
+        </div>
+        <div
+          class="sc-bXCLTC bMHor"
+        >
+          <div
+            aria-describedby="DndDescribedBy-4"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            role="button"
+            style="transition: transform 200ms ease;"
+            tabindex="0"
+          />
+        </div>
+      </div>
+      <div
+        class="sc-bXCLTC ioIWcI"
+      >
+        <div
+          class="sc-bXCLTC bNzrHL"
+        >
+          <p
+            class="sc-dxcDKg kVbkpz  wui-text"
+            color="black"
+          >
+            C
+          </p>
+          <div
+            class="sc-gvZAcH btjirq"
+          >
+            0
+          </div>
+        </div>
+        <div
+          class="sc-bXCLTC bMHor"
+        >
+          <div
+            aria-describedby="DndDescribedBy-4"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            role="button"
+            style="transition: transform 200ms ease;"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="DndDescribedBy-4"
+    style="display: none;"
+  >
+    
+    To pick up a draggable item, press the space bar.
+    While dragging, use the arrow keys to move the item.
+    Press space again to drop the item in its new position, or press escape to cancel.
+  
+  </div>
+  <div
+    aria-atomic="true"
+    aria-live="assertive"
+    id="DndLiveRegion-4"
+    role="status"
+    style="position: fixed; top: 0px; left: 0px; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%); white-space: nowrap;"
+  >
+    Draggable item 2 was moved over droppable area 1.
+  </div>
+</DocumentFragment>
+`;
