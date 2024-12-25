@@ -10,6 +10,7 @@ exports[`CardOrganizer > calls onChange with the updated items 1`] = `
     >
       <div
         class="sc-bXCLTC ioIWcI"
+        data-testid="column-A"
       >
         <div
           class="sc-bXCLTC bNzrHL"
@@ -54,6 +55,7 @@ exports[`CardOrganizer > calls onChange with the updated items 1`] = `
       </div>
       <div
         class="sc-bXCLTC ioIWcI"
+        data-testid="column-B"
       >
         <div
           class="sc-bXCLTC bNzrHL"
@@ -86,6 +88,7 @@ exports[`CardOrganizer > calls onChange with the updated items 1`] = `
       </div>
       <div
         class="sc-bXCLTC ioIWcI"
+        data-testid="column-C"
       >
         <div
           class="sc-bXCLTC bNzrHL"
@@ -159,6 +162,7 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
       </div>
       <div
         class="sc-bXCLTC ioIWcI"
+        data-testid="column-A"
       >
         <div
           class="sc-bXCLTC bNzrHL"
@@ -184,7 +188,7 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
             aria-disabled="false"
             aria-roledescription="sortable"
             role="button"
-            style="transition: transform 200ms ease; transform: translate3d(0px, 0px, 0) scaleX(1) scaleY(1);"
+            style="transition: transform 200ms ease;"
             tabindex="0"
           >
             Item 1
@@ -192,10 +196,9 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
           <div
             aria-describedby="DndDescribedBy-4"
             aria-disabled="false"
-            aria-pressed="true"
             aria-roledescription="sortable"
             role="button"
-            style="transition: transform 200ms ease; opacity: 0.5; transform: translate3d(0px, 0px, 0) scaleX(1) scaleY(1);"
+            style="transition: transform 200ms ease;"
             tabindex="0"
           >
             Item 2
@@ -204,6 +207,7 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
       </div>
       <div
         class="sc-bXCLTC ioIWcI"
+        data-testid="column-B"
       >
         <div
           class="sc-bXCLTC bNzrHL"
@@ -229,13 +233,14 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
             aria-disabled="false"
             aria-roledescription="sortable"
             role="button"
-            style="transition: transform 200ms ease;"
+            style=""
             tabindex="0"
           />
         </div>
       </div>
       <div
         class="sc-bXCLTC ioIWcI"
+        data-testid="column-C"
       >
         <div
           class="sc-bXCLTC bNzrHL"
@@ -261,7 +266,7 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
             aria-disabled="false"
             aria-roledescription="sortable"
             role="button"
-            style="transition: transform 200ms ease;"
+            style=""
             tabindex="0"
           />
         </div>
@@ -285,7 +290,7 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
     role="status"
     style="position: fixed; top: 0px; left: 0px; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%); white-space: nowrap;"
   >
-    Draggable item 2 was moved over droppable area 1.
+    Dragging was cancelled. Draggable item 2 was dropped.
   </div>
 </DocumentFragment>
 `;

@@ -23,6 +23,11 @@ import {
   useSortable,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
+import {
+  EmptyItemPlaceholder,
+  emptyItemPlaceholderIdPrefix,
+  isEmptyItemPlaceholder,
+} from './helpers'
 
 export type CardOrganizerProps<Column extends string, Item extends ItemData> = {
   columns: Column[]
@@ -234,18 +239,6 @@ type ItemWithSortableData<Column extends string, Item extends ItemData> = Item &
   sortable: { containerId: Column; index: number; items: UniqueIdentifier[] }
 }
 
-const emptyItemPlaceholderIdPrefix = '__empty__'
-
-type EmptyItemPlaceholder<Column extends string> = {
-  id: `${typeof emptyItemPlaceholderIdPrefix}-${Column}`
-}
-
-function isEmptyItemPlaceholder<Column extends string>(
-  item: ItemData | EmptyItemPlaceholder<Column>
-): item is EmptyItemPlaceholder<Column> {
-  return item.id.toString().startsWith(emptyItemPlaceholderIdPrefix)
-}
-
 function toCardOrganizerItem<Column extends string, Item extends ItemData>(
   item: { [key: string]: unknown } | undefined
 ) {
@@ -281,6 +274,7 @@ function CardColumn<Column extends string, Item extends ItemData>({
       borderColor="neutral-30"
       borderRadius="md"
       overflow="hidden"
+      data-testid={`column-${column}`}
     >
       <Flex
         p={10}
@@ -292,7 +286,7 @@ function CardColumn<Column extends string, Item extends ItemData>({
         <Text color="black" m={0} textTransform="capitalize">
           {renderColumnLabel?.(column, itemsCount) ?? column}
         </Text>
-        <Badge dataTestId={`column-counter-${column}`}>{itemsCount}</Badge>
+        <Badge data-testid={`column-counter-${column}`}>{itemsCount}</Badge>
       </Flex>
 
       <Flex direction="column" p={10} pb={0} h="100%" minHeight={100}>

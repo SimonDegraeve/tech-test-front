@@ -18,6 +18,7 @@ const candidateStatusColumns: CandidateStatus[] = ['new', 'interview', 'hired', 
 
 function JobShow() {
   const { jobId } = useParams()
+
   const { job } = useJob(jobId)
   const { candidates } = useCandidates(jobId)
   const { mutateAsync } = useUpdateCandidate(jobId)
