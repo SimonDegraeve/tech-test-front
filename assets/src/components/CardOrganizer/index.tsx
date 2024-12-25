@@ -1,7 +1,6 @@
 import { forwardRef, memo, ReactNode, useEffect, useRef, useState } from 'react'
 import { Text } from '@welcome-ui/text'
 import { Flex } from '@welcome-ui/flex'
-import { Box } from '@welcome-ui/box'
 import { Badge } from '@welcome-ui/badge'
 import { CSS } from '@dnd-kit/utilities'
 import {
