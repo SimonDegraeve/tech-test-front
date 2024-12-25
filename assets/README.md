@@ -35,8 +35,6 @@ This is the file structure of the SPA:
 |    |--- test                  // Testing setup and utilities
 ```
 
-<!-- TODO -->
-
 ### Technical decisions and trade-offs
 
 #### Backend
@@ -75,27 +73,26 @@ This is the file structure of the SPA:
 
   I settled on `dnd-kit` because it met all the criteria and the documentation was very good. // pattern ref forwarding
 
-- I create a generic `CardOrganizer` component (data agnostic) that handles the drag-and-drop logic and the rendering of the columns and cards. This allows for a more modular and reusable codebase. The columns are memoized to avoid unnecessary re-renders. I used the reference forwarding pattern to allow the parent component to control the state of the cards and columns without too much wrapper nodes (useful for display the card overlay).
+- I created a generic `CardOrganizer` component (data agnostic) that handles the drag-and-drop logic and the rendering of the columns and cards. This allows for a more modular and reusable codebase. The columns are memoized to avoid unnecessary re-renders. I used the reference forwarding pattern to allow the parent component to control the state of the cards and columns without too many wrapper nodes (useful for display the card overlay).
 
 - I used [`mock-service-wortker`](https://mswjs.io/) to mock the API calls and data manipulation. This allow fine-grained control over the API responses and the ability to test edge network cases and error handling. It is more powerful than mocking `react-query`
 
 ### Future improvements
 
-- Internationalization
-- Dark mode
-- Offline mode
 - Authentication
-- Zod or Yup for validation
-- Virtual lists far card columns
+- Internationalization
+- Offline mode
+- Zod or Yup for validation of any data coming from outside the web application
+- Virtual list rendering for card columns
 - Monitoring/logging/error tracking (with Sentry, Datadog, etc)
-- Multi select
-- Get total number of candidates per status
+- Support selecting multiple cards at once
+- Get total number of candidates per status, as the backend is paginated, we would need an endpoint to get the total number of candidates and not rely on the partial number of candidates returned by the endpoint
 - Load more candidates on column scroll (load per column as the backend endpoint returns date per column)
+- CI/CD pipeline
+- Dark mode
 
 ## Setup instructions
 
 Locally:
 
 - Run `./run-dev` to start the project in Development mode (backend on port 4000 and frontend on port 5173)
-
-<!-- TODO: add live demo link -->

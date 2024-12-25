@@ -6,6 +6,10 @@ import { render } from '../../test-utils'
 import CardOrganizer from '../../components/CardOrganizer'
 import { isEmptyItemPlaceholder } from './helpers'
 
+/**
+ * Note: the tests rely on the keyboard navigation as the the DOM is emulated by the testing library (jsdom) we cannot trigger real drag and drop events.
+ * In order to test real drag and drop events, we should use a real browser in e2e tests (with utils like Playwright or Cypress).
+ */
 describe('CardOrganizer', () => {
   type Item = { id: UniqueIdentifier; name: string }
 
