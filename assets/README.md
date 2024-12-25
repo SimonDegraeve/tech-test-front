@@ -45,7 +45,7 @@ This is the file structure of the SPA:
 
 #### Frontend
 
-- As a Drag-and-drop behavior is complex and requires a lot of effort to implement from scratch, I decided to look for a library that would already implement the core functionality and would allow me to focus on the application logic.
+- As a drag-and-drop behavior is complex and requires a lot of effort to implement from scratch, I decided to look for a library that would already implement the core functionality and would allow me to focus on the application logic.
 
   The criteria for choosing the library were (in no particular order as all of them are important):
 
@@ -73,9 +73,13 @@ This is the file structure of the SPA:
 
   I settled on `dnd-kit` because it met all the criteria and the documentation was very good. // pattern ref forwarding
 
-- I created a generic `CardOrganizer` component (data agnostic) that handles the drag-and-drop logic and the rendering of the columns and cards. This allows for a more modular and reusable codebase. The columns are memoized to avoid unnecessary re-renders. I used the reference forwarding pattern to allow the parent component to control the state of the cards and columns without too many wrapper nodes (useful for display the card overlay).
+- I created a generic `CardOrganizer` component (data agnostic) that handles the drag-and-drop logic and the rendering of the columns and cards. This allows for a more modular and reusable codebase. The columns are memoized to avoid unnecessary re-renders (with the assumption that the data displays inside the card (ex: user email) will not change during the lifecycle of the component). I used the reference forwarding pattern to allow the parent component to control the state of the cards and columns without too many wrapper nodes (useful for display the card overlay).
 
-- I updated the design of the columns to take the full height of the screen to get the same design no matter the number of cards in the columns. I also added an animation to rotate the dragged card to give a visual feedback to the user and created a semi transparent card preview to show where the card will be dropped. I also use the theme from the welcome-ui design system to have a consistent design with the branding (ex: yellow outline when moving cards with the keyboard).
+- For the calculation of the new candidate position after reordering, I used an algorithm to set the candidate new position to be half-way between the previous and the next candidate in the same column. This way the user can reorder the cards multiple times without the need to shift the position of all the other cards, this is efficient but is not unlimited as the position of the cards will ultimately converge to 1 if the user keeps reordering the cards.
+
+- I updated the design of the columns to take the full height of the screen to get the same design no matter the number of cards in the columns. I also added an animation to rotate the dragged card to give a visual feedback to the user and created a semi transparent card preview to show where the card will be dropped. I also used the theme from the welcome-ui design system to have a consistent design with the branding (ex: yellow outline when moving cards with the keyboard).
+
+- Loading state handled with Suspense and a nice looking loader, so the user knows can differentiate between loading and empty state (ex: candidates count being 0 while loading, can be confusing for the user).
 
 - I used [`mock-service-wortker`](https://mswjs.io/) to mock the API calls and data manipulation. This allow fine-grained control over the API responses and the ability to test edge network cases and error handling. It is more powerful than mocking `react-query`
 
@@ -91,7 +95,6 @@ This is the file structure of the SPA:
 - Get total number of candidates per status, as the backend is paginated, we would need an endpoint to get the total number of candidates and not rely on the partial number of candidates returned by the endpoint
 - Load more candidates on column scroll (load per column as the backend endpoint returns date per column)
 - CI/CD pipeline
-- Dark mode
 
 ## Setup instructions
 
