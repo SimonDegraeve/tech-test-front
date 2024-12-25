@@ -269,6 +269,7 @@ function CardColumn<Column extends string, Item extends ItemData>({
   activeItem: ItemWithSortableData<Column, Item> | undefined
   renderCard: (item: Item) => ReactNode
   renderColumnLabel?: (column: Column, count: number) => ReactNode
+  maxColumnSize?: number
 }) {
   const itemsCount = items.filter(item => !isEmptyItemPlaceholder(item)).length
 
@@ -291,7 +292,7 @@ function CardColumn<Column extends string, Item extends ItemData>({
         <Text color="black" m={0} textTransform="capitalize">
           {renderColumnLabel?.(column, itemsCount) ?? column}
         </Text>
-        <Badge>{itemsCount}</Badge>
+        <Badge dataTestId={`column-counter-${column}`}>{itemsCount}</Badge>
       </Flex>
 
       <Flex direction="column" p={10} pb={0} h="100%" minHeight={100}>

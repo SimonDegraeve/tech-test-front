@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`card organizer > calls onChange with the updated items 1`] = `
+exports[`CardOrganizer > calls onChange with the updated items 1`] = `
 <DocumentFragment>
   <div
     class="sc-bXCLTC gghOHk"
@@ -22,6 +22,7 @@ exports[`card organizer > calls onChange with the updated items 1`] = `
           </p>
           <div
             class="sc-gvZAcH btjirq"
+            data-testid="column-counter-A"
           >
             2
           </div>
@@ -65,6 +66,7 @@ exports[`card organizer > calls onChange with the updated items 1`] = `
           </p>
           <div
             class="sc-gvZAcH btjirq"
+            data-testid="column-counter-B"
           >
             0
           </div>
@@ -96,6 +98,7 @@ exports[`card organizer > calls onChange with the updated items 1`] = `
           </p>
           <div
             class="sc-gvZAcH btjirq"
+            data-testid="column-counter-C"
           >
             0
           </div>
@@ -137,7 +140,7 @@ exports[`card organizer > calls onChange with the updated items 1`] = `
 </DocumentFragment>
 `;
 
-exports[`card organizer > does not call onChange when there are no changes 1`] = `
+exports[`CardOrganizer > does not call onChange when there are no changes or mouvement is canceled 1`] = `
 <DocumentFragment>
   <div
     class="sc-bXCLTC gghOHk"
@@ -168,6 +171,7 @@ exports[`card organizer > does not call onChange when there are no changes 1`] =
           </p>
           <div
             class="sc-gvZAcH btjirq"
+            data-testid="column-counter-A"
           >
             2
           </div>
@@ -212,6 +216,7 @@ exports[`card organizer > does not call onChange when there are no changes 1`] =
           </p>
           <div
             class="sc-gvZAcH btjirq"
+            data-testid="column-counter-B"
           >
             0
           </div>
@@ -243,6 +248,7 @@ exports[`card organizer > does not call onChange when there are no changes 1`] =
           </p>
           <div
             class="sc-gvZAcH btjirq"
+            data-testid="column-counter-C"
           >
             0
           </div>

@@ -5,7 +5,7 @@ import { UniqueIdentifier } from '@dnd-kit/core'
 import { render } from '../../test-utils'
 import CardOrganizer from '../../components/CardOrganizer'
 
-describe('card organizer', () => {
+describe('CardOrganizer', () => {
   type Item = { id: UniqueIdentifier; name: string }
 
   const defaultProps = {
@@ -20,13 +20,16 @@ describe('card organizer', () => {
     renderCard: (item: Item) => item.name,
   }
 
-  test('renders every columns', () => {
-    const { getByText } = render(
+  test('renders every columns with their counters', () => {
+    const { getByText, getByTestId } = render(
       <CardOrganizer<(typeof defaultProps.columns)[number], Item> {...defaultProps} />
     )
 
     for (const column of defaultProps.columns) {
       expect(getByText(column)).toBeInTheDocument()
+      expect(getByTestId(`column-counter-${column}`)).toHaveTextContent(
+        (defaultProps.items[column as 'A']?.length ?? 0).toString()
+      )
     }
   })
 
@@ -93,7 +96,7 @@ describe('card organizer', () => {
     })
   })
 
-  test('does not call onChange when there are no changes', async () => {
+  test('does not call onChange when there are no changes or mouvement is canceled', async () => {
     const onChange = vi.fn().mockResolvedValue(new Promise(() => {}))
 
     const { getByRole, asFragment } = render(
