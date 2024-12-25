@@ -33,3 +33,6 @@ afterAll(() => server.close())
 
 // Reset handlers after each test
 afterEach(() => server.resetHandlers())
+
+// Drag and drop features rely on scrollIntoView which is not implemented in jsdom
+window.HTMLElement.prototype.scrollIntoView = function () {}
