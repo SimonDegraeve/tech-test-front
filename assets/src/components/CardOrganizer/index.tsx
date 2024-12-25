@@ -189,7 +189,8 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
             const items: (Item | EmptyItemPlaceholder<Column>)[] =
               internalItems?.[column] ?? parentItems[column] ?? []
 
-            // Add an empty item placeholder if the column is empty
+            // Add an empty item placeholder if the column is empty,
+            // this is necessary to allow dragging items to an empty column because we need somethinng to collide with
             if (!items.length) {
               items.push({ id: `${emptyItemPlaceholderIdPrefix}-${column}` })
             }
@@ -289,7 +290,7 @@ function CardColumn<Column extends string, Item extends ItemData>({
         <Badge data-testid={`column-counter-${column}`}>{itemsCount}</Badge>
       </Flex>
 
-      <Flex direction="column" p={10} pb={0} h="100%" minHeight={100}>
+      <Flex direction="column" p={10} minHeight={100} gap={10}>
         {items.map(item => (
           <SortableItem
             key={item.id}
