@@ -3,7 +3,7 @@
 exports[`CardOrganizer > calls onChange with the updated items 1`] = `
 <DocumentFragment>
   <div
-    class="sc-bXCLTC gghOHk"
+    class="sc-bXCLTC kEwsBz"
   >
     <div
       class="sc-bXCLTC epIQNw"
@@ -146,7 +146,7 @@ exports[`CardOrganizer > calls onChange with the updated items 1`] = `
 exports[`CardOrganizer > does not call onChange when there are no changes or mouvement is canceled 1`] = `
 <DocumentFragment>
   <div
-    class="sc-bXCLTC gghOHk"
+    class="sc-bXCLTC kEwsBz"
   >
     <div
       class="sc-bXCLTC epIQNw"

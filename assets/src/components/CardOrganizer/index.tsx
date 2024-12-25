@@ -177,7 +177,7 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
       onDragOver={onDragOver}
       onDragCancel={onDragCancel}
     >
-      <Box p={20}>
+      <Flex p={20} flexGrow={1}>
         <Flex gap={10}>
           <DragOverlay>
             {internalActiveItem ? (
@@ -214,7 +214,7 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
             )
           })}
         </Flex>
-      </Box>
+      </Flex>
     </DndContext>
   )
 }
