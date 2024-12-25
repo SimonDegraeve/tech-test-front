@@ -1,6 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom'
-import { useJobs } from '../../api'
 import { Link } from '@welcome-ui/link'
+import { useJobs } from '../../api'
 
 function JobIndex() {
   const { isLoading, jobs } = useJobs()

@@ -1,7 +1,8 @@
-import { Button } from '@welcome-ui/button'
 import { QueryErrorResetBoundary } from 'react-query'
 import { ErrorBoundary } from 'react-error-boundary'
+import { Button } from '@welcome-ui/button'
 import { Flex } from '@welcome-ui/flex'
+import { Logo } from '@welcome-ui/logo'
 
 function QueryErrorBoundary({ children }: { children: React.ReactNode }) {
   return (
@@ -19,7 +20,7 @@ function QueryErrorBoundary({ children }: { children: React.ReactNode }) {
                 flexDirection="column"
                 gap={100}
               >
-                <img src="/wttj.svg" alt="Welcome to the jungle logo" style={{ width: 400 }} />
+                <Logo w="400" />
                 <div style={{ textAlign: 'center' }}>
                   <p>There was an error while loading your data.</p>
                   <Button onClick={() => resetErrorBoundary()}>Try again</Button>

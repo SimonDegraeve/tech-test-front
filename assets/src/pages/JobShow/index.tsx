@@ -2,18 +2,17 @@ import { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { Text } from '@welcome-ui/text'
 import { Box } from '@welcome-ui/box'
-
+import { Flex } from '@welcome-ui/flex'
 import {
   CandidateStatus,
   getCandidatePosition,
   useCandidates,
   useJob,
   useUpdateCandidate,
+  Candidate,
 } from '../../api'
-import { Candidate } from '../../api'
 import CandidateCard from '../../components/Candidate'
 import CardOrganizer, { ColumnUpdate } from '../../components/CardOrganizer'
-import { Flex } from '@welcome-ui/flex'
 
 const candidateStatusColumns: CandidateStatus[] = ['new', 'interview', 'hired', 'rejected']
 
@@ -22,7 +21,7 @@ function JobShow() {
 
   const { job } = useJob(jobId)
   const { candidates } = useCandidates(jobId)
-  const { mutateAsync, isError } = useUpdateCandidate(jobId)
+  const { mutateAsync: updateCandidate } = useUpdateCandidate(jobId)
 
   const sortedCandidates = useMemo(() => {
     if (!candidates) return {}
@@ -68,15 +67,11 @@ function JobShow() {
     )
 
     // Mutate the candidate with the new status and position
-    await mutateAsync({
+    await updateCandidate({
       ...currentCandidate,
       status: newCandidateStatus,
       position: newCandidatePosition,
     })
-  }
-
-  if (isError) {
-    return <Text variant="h5">Error updating candidate</Text>
   }
 
   return (

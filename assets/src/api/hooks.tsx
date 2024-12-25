@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { getCandidates, getJob, getJobs, updateCandidate } from './fetchers'
 import { Candidate, CandidateStatus } from './types'
+import { toast, Toast } from '@welcome-ui/toast'
 
 /**
  * Registry of query keys used in the app
@@ -74,7 +75,6 @@ export const useUpdateCandidate = (jobId?: string) => {
 
   return useMutation({
     mutationFn: (candidate: Candidate) => updateCandidate(jobId, candidate),
-
     onMutate: async candidate => {
       // Cancel outgoing refetches
       await queryClient.cancelQueries({ queryKey: candidatesQueryKey })
@@ -115,6 +115,15 @@ export const useUpdateCandidate = (jobId?: string) => {
       if (context?.previousCandidates) {
         queryClient.setQueryData<CandidatesResponse>(candidatesQueryKey, context.previousCandidates)
       }
+
+      console.log('---------')
+      // NOTE: should monitor the error via Sentry/Datadog or other error tracking service
+      toast(
+        <Toast.Growl variant="danger">
+          <Toast.Title>Oops! An error occurred.</Toast.Title>
+          Could not update the candidate "{newCandidate?.email}"
+        </Toast.Growl>
+      )
     },
     onSettled: () => {
       // Optionally: refetch after error or success:

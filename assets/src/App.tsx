@@ -1,4 +1,5 @@
 import { createTheme, WuiProvider } from '@welcome-ui/core'
+import { Notifications } from '@welcome-ui/toast'
 import { createGlobalStyle } from 'styled-components'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import JobIndex from './pages/JobIndex'
@@ -10,20 +11,6 @@ const theme = createTheme()
 const GlobalStyles = createGlobalStyle`
 * {
   outline-color: ${theme.colors['primary-40']};
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.1);
-  }
-
-  100% {
-    transform: scale(1);
-  }
 }
 `
 
@@ -44,6 +31,7 @@ function App() {
       <GlobalStyles />
       <WuiProvider theme={theme}>
         <RouterProvider router={router} />
+        <Notifications />
       </WuiProvider>
     </>
   )

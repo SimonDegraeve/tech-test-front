@@ -2,6 +2,7 @@ import { forwardRef, memo, ReactNode, useEffect, useRef, useState } from 'react'
 import { Text } from '@welcome-ui/text'
 import { Flex } from '@welcome-ui/flex'
 import { Badge } from '@welcome-ui/badge'
+import { Box, BoxProps } from '@welcome-ui/box'
 import { CSS } from '@dnd-kit/utilities'
 import {
   closestCenter,
@@ -176,43 +177,41 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
       onDragOver={onDragOver}
       onDragCancel={onDragCancel}
     >
-      <Flex p={'20 0'} overflow="hidden" flexGrow={1}>
-        <Flex gap={10} overflow="hidden">
-          <DragOverlay>
-            {internalActiveItem ? (
-              <Item style={{ transform: 'rotate(3deg)' }}>{renderCard(internalActiveItem)}</Item>
-            ) : null}
-          </DragOverlay>
+      <Flex p={'20 0'} overflow="hidden" flexGrow={1} gap={10}>
+        <DragOverlay>
+          {internalActiveItem ? (
+            <Item style={{ transform: 'rotate(3deg)' }}>{renderCard(internalActiveItem)}</Item>
+          ) : null}
+        </DragOverlay>
 
-          {columns.map(column => {
-            const items: (Item | EmptyItemPlaceholder<Column>)[] =
-              internalItems?.[column] ?? parentItems[column] ?? []
+        {columns.map(column => {
+          const items: (Item | EmptyItemPlaceholder<Column>)[] =
+            internalItems?.[column] ?? parentItems[column] ?? []
 
-            // Add an empty item placeholder if the column is empty,
-            // this is necessary to allow dragging items to an empty column because we need somethinng to collide with
-            if (!items.length) {
-              items.push({ id: `${emptyItemPlaceholderIdPrefix}-${column}` })
-            }
+          // Add an empty item placeholder if the column is empty,
+          // this is necessary to allow dragging items to an empty column because we need somethinng to collide with
+          if (!items.length) {
+            items.push({ id: `${emptyItemPlaceholderIdPrefix}-${column}` })
+          }
 
-            return (
-              <SortableContext
-                id={column}
+          return (
+            <SortableContext
+              id={column}
+              key={column}
+              items={items}
+              strategy={verticalListSortingStrategy}
+            >
+              <MemoizedCardColumn
                 key={column}
+                column={column}
                 items={items}
-                strategy={verticalListSortingStrategy}
-              >
-                <MemoizedCardColumn
-                  key={column}
-                  column={column}
-                  items={items}
-                  activeItem={internalActiveItem}
-                  renderCard={renderCard}
-                  renderColumnLabel={renderColumnLabel}
-                />
-              </SortableContext>
-            )
-          })}
-        </Flex>
+                activeItem={internalActiveItem}
+                renderCard={renderCard}
+                renderColumnLabel={renderColumnLabel}
+              />
+            </SortableContext>
+          )
+        })}
       </Flex>
     </DndContext>
   )
@@ -294,7 +293,16 @@ function CardColumn<Column extends string, Item extends ItemData>({
       </Flex>
 
       <Flex overflow="hidden" h="100%">
-        <Flex direction="column" p={10} minHeight={100} gap={10} overflow="auto" w="100%">
+        <Flex
+          as="ul"
+          direction="column"
+          p={10}
+          minHeight={100}
+          gap={10}
+          overflow="auto"
+          w="100%"
+          listStyleType="none"
+        >
           {items.map(item => (
             <SortableItem
               key={item.id}
@@ -334,14 +342,14 @@ const MemoizedCardColumn = memo(
  * Item & SortableItem components
  */
 
-export type ItemProps = React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>
+export type ItemProps = BoxProps
 
 export const Item = forwardRef(
   ({ children, ...props }: ItemProps, ref: React.LegacyRef<HTMLDivElement> | undefined) => {
     return (
-      <div {...props} ref={ref}>
+      <Box {...props} ref={ref}>
         {children}
-      </div>
+      </Box>
     )
   }
 )
@@ -367,7 +375,7 @@ export function SortableItem<DragItemData extends ItemData>({
   }
 
   return (
-    <Item ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <Item as="li" ref={setNodeRef} style={style} {...attributes} {...listeners}>
       {children}
     </Item>
   )

@@ -1,4 +1,5 @@
 import { Flex } from '@welcome-ui/flex'
+import { WelcomeLoader } from '@welcome-ui/welcome-loader'
 
 function Loader() {
   return (
@@ -10,14 +11,7 @@ function Loader() {
       flexDirection="column"
       gap={100}
     >
-      <img
-        src="/wttj.svg"
-        alt="Welcome to the jungle logo"
-        style={{
-          width: 400,
-          animation: 'pulse 2s infinite ease-in-out',
-        }}
-      />
+      <WelcomeLoader />
       <div>Loading...</div>
     </Flex>
   )
