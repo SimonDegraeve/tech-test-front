@@ -59,11 +59,11 @@ function JobShow() {
     }
 
     // Calculate the new candidate position based on ascending or descending order
-    const isAscendingOrder = from.sortable.index > to.sortable.index
+    const isDescendingOrder = from.sortable.index > to.sortable.index
     const newCandidatePosition = getCandidatePosition(
       columnCandidates as Candidate[],
       to.sortable.index,
-      isAscendingOrder
+      isDescendingOrder
     )
 
     // Mutate the candidate with the new status and position

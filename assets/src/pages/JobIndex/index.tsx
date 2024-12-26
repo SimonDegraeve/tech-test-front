@@ -11,7 +11,7 @@ function JobIndex() {
     <>
       <Box color="neutral-70" backgroundColor="beige-30" p={20} alignItems="center">
         <Text variant="h5" m={0} maxWidth={1200} margin="auto">
-          List of opened jobs :
+          List of jobs :
         </Text>
       </Box>
 

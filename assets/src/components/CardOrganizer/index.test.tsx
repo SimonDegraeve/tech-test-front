@@ -12,6 +12,7 @@ import { isEmptyItemPlaceholder } from './helpers'
  */
 describe('CardOrganizer', () => {
   type Item = { id: UniqueIdentifier; name: string }
+  type Column = 'A' | 'B' | 'C'
 
   const defaultProps = {
     columns: ['A', 'B', 'C'],
@@ -37,7 +38,7 @@ describe('CardOrganizer', () => {
       expect(getByText(column)).toBeInTheDocument()
 
       expect(getByTestId(`column-counter-${column}`)).toHaveTextContent(
-        (defaultProps.items[column as 'A'] ?? [])
+        (defaultProps.items[column as Column] ?? [])
           .filter(item => !isEmptyItemPlaceholder(item))
           .length.toString()
       )
@@ -65,7 +66,7 @@ describe('CardOrganizer', () => {
     for (const column of defaultProps.columns) {
       expect(getByTestId(`column-${column}`)).toBeInTheDocument()
 
-      for (const item of defaultProps.items[column as 'A'] ?? []) {
+      for (const item of defaultProps.items[column as Column] ?? []) {
         if (isEmptyItemPlaceholder(item)) {
           continue
         }

@@ -71,7 +71,7 @@ This is the file structure of the SPA:
 
   `pragmatic-drag-and-drop` was a very compelling option as it is developed by Atlassian (very much battle-tested) but the styling was quite opinionated and using a different Css-in-JS library (Emotion) and the project rely a lot on other packages.
 
-  I settled on `dnd-kit` because it met all the criteria and the documentation was very good. // pattern ref forwarding
+  I settled on `dnd-kit` with the [sortable](https://docs.dndkit.com/presets/sortable) because it met all the criteria and the documentation was very good.
 
 - I created a generic `CardOrganizer` component (data agnostic) that handles the drag-and-drop logic and the rendering of the columns and cards. This allows for a more modular and reusable codebase. The columns are memoized to avoid unnecessary re-renders (with the assumption that the data displays inside the card (ex: user email) will not change during the lifecycle of the component). I used the reference forwarding pattern to allow the parent component to control the state of the cards and columns without too many wrapper nodes (useful for display the card overlay). I created a system of placeholder for empty lists so the user can trigger the collision detection and drop the card in an empty column.
 
@@ -79,11 +79,13 @@ This is the file structure of the SPA:
 
 - I used the features from `react-query` to handle a centralized cache with optimistic and atomic updates. I did not invalidate the cache after a mutation, as I assume that a successful PATCH call means the client update can be trusted. I kept the default query options to re-fetch the data when the window is focused to keep the data up-to-date.
 
+- I explored the [welcome-ui](https://www.welcome-ui.com/components) design system to know which components are available and how to use them (ex: Logo, Loader, Toast, etc)
+
 - I updated the design of the columns to take the full height of the screen to get the same design no matter the number of cards in the columns. Columns are also independently scrollable while displaying all essential info (page title, column title, etc) so the user can align cards from different columns as they please (ex: show beginning of first column and end of second column at the same time). I also added an animation to rotate the dragged card to give a visual feedback to the user and created a semi transparent card preview to show where the card will be dropped. I also used the theme from the welcome-ui design system to have a consistent design with the branding (ex: yellow outline when moving cards with the keyboard).
 
-- Loading state handled with React (Suspense)[https://react.dev/reference/react/Suspense] and a nice looking loader, so the user knows can differentiate between loading and empty state (ex: candidates count being 0 while loading, can be confusing for the user).
+- I handled the queries loading states with (Suspense)[https://react.dev/reference/react/Suspense] and a nice looking loader, so the user knows can differentiate between loading and empty state (ex: candidates count being 0 while loading, can be confusing for the user).
 
-- Error state handled with (ErrorBoundaries)[https://legacy.reactjs.org/docs/error-boundaries.html] for data load to inform the user of the eventual error and give them the ability to retry the operation. The mutations errors are handled within the component triggering the mutation to give a more specific error message to the user.
+- I handled the queries error states with (ErrorBoundaries)[https://legacy.reactjs.org/docs/error-boundaries.html] to inform the user of the eventual error and give them the ability to retry the operation. The mutations errors are handled within the component triggering the mutation to give a more specific error message to the user with a Toast notification.
 
 - I used [`mock-service-wortker`](https://mswjs.io/) to mock the API calls and data manipulation. This allow fine-grained control over the API responses and the ability to test edge network cases and error handling. It is more powerful than mocking `react-query`
 
@@ -98,6 +100,7 @@ Related to the features:
 
 General:
 
+- E2E tests with Cypress/Playwright etc, especially for the drag-and-drop behavior, real browser behavior with those complex events cannot be fully tested with unit/integration tests as they rely on jsdom which is just a simulation of the browser environment
 - Zod or Yup for validation of any data coming from outside the web application
 - Authentication
 - Offline mode

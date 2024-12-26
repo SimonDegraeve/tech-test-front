@@ -101,7 +101,7 @@ describe('JobShow', () => {
     await findByText('Draggable item 4 was dropped over droppable area __empty__-interview')
 
     // Ensure the server get the change
-    expect(updateCandidateSpy).toHaveBeenCalledWith(`${apiUrl}/jobs/1/candidates/1`, {
+    expect(updateCandidateSpy).toHaveBeenCalledWith(`${apiUrl}/jobs/1/candidates/4`, {
       body: '{"candidate":{"id":4,"email":"user4@email.com","position":40960,"status":"interview"}}',
       headers: { 'Content-Type': 'application/json' },
       method: 'PATCH',

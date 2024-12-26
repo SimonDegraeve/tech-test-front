@@ -5,15 +5,15 @@ import { Candidate } from './types'
 export const getCandidatePosition = (
   candidates: Candidate[],
   index: number,
-  isAscendingOrder: boolean
+  isDescendingOrder: boolean
 ) => {
   const previousCandidatePosition = candidates[index - 1]?.position ?? 0
   const defaultNextCandidatePosition = (index || 1) * candidatePositionInterval
   let nextCandidatePosition
   let newCandidatePosition
 
-  // If the order is ascending, the new candidate position should be between the previous and next candidate
-  if (isAscendingOrder) {
+  // If the order is descending, the new candidate position should be between the previous and next candidate
+  if (isDescendingOrder) {
     nextCandidatePosition = candidates[index]?.position ?? defaultNextCandidatePosition
 
     // The new position should be at least one position after the previous candidate
@@ -23,7 +23,7 @@ export const getCandidatePosition = (
       nextCandidatePosition - Math.floor((nextCandidatePosition - previousCandidatePosition) / 2)
     )
   }
-  // If the order is descending, the new candidate position should be after the next candidate
+  // If the order is ascending, the new candidate position should be after the next candidate
   else {
     nextCandidatePosition = candidates[index + 1]?.position ?? defaultNextCandidatePosition
 

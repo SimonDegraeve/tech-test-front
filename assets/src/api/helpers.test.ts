@@ -30,40 +30,40 @@ describe('getCandidatePosition', () => {
     },
   ]
 
-  describe('Ascending order', () => {
-    const isAscendingOrder = true
+  describe('Descending order', () => {
+    const isDescendingOrder = true
 
     test('check first item position', async () => {
-      const result = getCandidatePosition(candidates, 0, isAscendingOrder)
+      const result = getCandidatePosition(candidates, 0, isDescendingOrder)
       expect(result).toBe(candidatePositionInterval / 2)
     })
 
     test('check middle item position', async () => {
-      const result = getCandidatePosition(candidates, 1, isAscendingOrder)
+      const result = getCandidatePosition(candidates, 1, isDescendingOrder)
       expect(result).toBe(candidatePositionInterval + candidatePositionInterval / 2)
     })
 
     test('check last item position', async () => {
-      const result = getCandidatePosition(candidates, 3, isAscendingOrder)
+      const result = getCandidatePosition(candidates, 3, isDescendingOrder)
       expect(result).toBe(candidatePositionInterval * 3 + candidatePositionInterval / 2)
     })
   })
 
-  describe('Descending order', () => {
-    const isAscendingOrder = false
+  describe('Ascending order', () => {
+    const isDescendingOrder = false
 
     test('check first item position', async () => {
-      const result = getCandidatePosition(candidates, 0, isAscendingOrder)
+      const result = getCandidatePosition(candidates, 0, isDescendingOrder)
       expect(result).toBe(candidatePositionInterval)
     })
 
     test('check middle item position', async () => {
-      const result = getCandidatePosition(candidates, 1, isAscendingOrder)
+      const result = getCandidatePosition(candidates, 1, isDescendingOrder)
       expect(result).toBe(candidatePositionInterval * 2)
     })
 
     test('check last item position', async () => {
-      const result = getCandidatePosition(candidates, 3, isAscendingOrder)
+      const result = getCandidatePosition(candidates, 3, isDescendingOrder)
       expect(result).toBe(candidatePositionInterval * 3)
     })
   })
