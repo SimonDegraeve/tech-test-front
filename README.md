@@ -117,6 +117,8 @@ Locally:
 
 - Run `./run-dev` to start the project in Development mode (backend on port 4000 and frontend on port 5173)
 
+- `cd assets && yarn test` to run the frontend tests
+
 ## Screenshots
 
 <img width="1461" alt="image" src="https://github.com/user-attachments/assets/e69e52eb-38fd-47b8-be92-776fefa23e55" />
