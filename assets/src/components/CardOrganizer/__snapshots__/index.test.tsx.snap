@@ -33,6 +33,177 @@ exports[`CardOrganizer > calls onChange with the updated items when moving Down 
           class="sc-bXCLTC dcgcDq"
         >
           <li
+            aria-describedby="DndDescribedBy-5"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 2
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-5"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 1
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-5"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 3
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-B"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
+        >
+          B
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-B"
+        >
+          0
+        </div>
+      </div>
+      <div
+        class="sc-bXCLTC bzcJpH"
+      >
+        <ul
+          class="sc-bXCLTC dcgcDq"
+        >
+          <li
+            aria-describedby="DndDescribedBy-5"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          />
+        </ul>
+      </div>
+    </div>
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-C"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
+        >
+          C
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-C"
+        >
+          1
+        </div>
+      </div>
+      <div
+        class="sc-bXCLTC bzcJpH"
+      >
+        <ul
+          class="sc-bXCLTC dcgcDq"
+        >
+          <li
+            aria-describedby="DndDescribedBy-5"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 4
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    id="DndDescribedBy-5"
+    style="display: none;"
+  >
+    
+    To pick up a draggable item, press the space bar.
+    While dragging, use the arrow keys to move the item.
+    Press space again to drop the item in its new position, or press escape to cancel.
+  
+  </div>
+  <div
+    aria-atomic="true"
+    aria-live="assertive"
+    id="DndLiveRegion-5"
+    role="status"
+    style="position: fixed; top: 0px; left: 0px; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%); white-space: nowrap;"
+  >
+    Draggable item 2 was dropped over droppable area 1
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CardOrganizer > calls onChange with the updated items when moving Left 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bXCLTC idgagy"
+  >
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-A"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
+        >
+          A
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-A"
+        >
+          4
+        </div>
+      </div>
+      <div
+        class="sc-bXCLTC bzcJpH"
+      >
+        <ul
+          class="sc-bXCLTC dcgcDq"
+        >
+          <li
             aria-describedby="DndDescribedBy-4"
             aria-disabled="false"
             aria-roledescription="sortable"
@@ -42,6 +213,17 @@ exports[`CardOrganizer > calls onChange with the updated items when moving Down 
             tabindex="0"
           >
             Item 1
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-4"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 4
           </li>
           <li
             aria-describedby="DndDescribedBy-4"
@@ -164,7 +346,187 @@ exports[`CardOrganizer > calls onChange with the updated items when moving Down 
     role="status"
     style="position: fixed; top: 0px; left: 0px; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%); white-space: nowrap;"
   >
-    Draggable item 1 was dropped over droppable area 1
+    Draggable item 4 was dropped over droppable area 1
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CardOrganizer > calls onChange with the updated items when moving Right 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bXCLTC idgagy"
+  >
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-A"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
+        >
+          A
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-A"
+        >
+          4
+        </div>
+      </div>
+      <div
+        class="sc-bXCLTC bzcJpH"
+      >
+        <ul
+          class="sc-bXCLTC dcgcDq"
+        >
+          <li
+            aria-describedby="DndDescribedBy-6"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 1
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-6"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 4
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-6"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 2
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-6"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 3
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-B"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
+        >
+          B
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-B"
+        >
+          0
+        </div>
+      </div>
+      <div
+        class="sc-bXCLTC bzcJpH"
+      >
+        <ul
+          class="sc-bXCLTC dcgcDq"
+        >
+          <li
+            aria-describedby="DndDescribedBy-6"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          />
+        </ul>
+      </div>
+    </div>
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-C"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
+        >
+          C
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-C"
+        >
+          0
+        </div>
+      </div>
+      <div
+        class="sc-bXCLTC bzcJpH"
+      >
+        <ul
+          class="sc-bXCLTC dcgcDq"
+        >
+          <li
+            aria-describedby="DndDescribedBy-6"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          />
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    id="DndDescribedBy-6"
+    style="display: none;"
+  >
+    
+    To pick up a draggable item, press the space bar.
+    While dragging, use the arrow keys to move the item.
+    Press space again to drop the item in its new position, or press escape to cancel.
+  
+  </div>
+  <div
+    aria-atomic="true"
+    aria-live="assertive"
+    id="DndLiveRegion-6"
+    role="status"
+    style="position: fixed; top: 0px; left: 0px; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%); white-space: nowrap;"
+  >
+    Draggable item 4 was dropped over droppable area 1
   </div>
 </DocumentFragment>
 `;
@@ -294,7 +656,7 @@ exports[`CardOrganizer > calls onChange with the updated items when moving Up 1`
           class="sc-isRoRg fOncLZ"
           data-testid="column-counter-C"
         >
-          0
+          1
         </div>
       </div>
       <div
@@ -311,7 +673,9 @@ exports[`CardOrganizer > calls onChange with the updated items when moving Up 1`
             role="button"
             style=""
             tabindex="0"
-          />
+          >
+            Item 4
+          </li>
         </ul>
       </div>
     </div>
@@ -381,7 +745,7 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
           class="sc-bXCLTC dcgcDq"
         >
           <li
-            aria-describedby="DndDescribedBy-5"
+            aria-describedby="DndDescribedBy-7"
             aria-disabled="false"
             aria-roledescription="sortable"
             class="sc-bXCLTC"
@@ -392,7 +756,7 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
             Item 1
           </li>
           <li
-            aria-describedby="DndDescribedBy-5"
+            aria-describedby="DndDescribedBy-7"
             aria-disabled="false"
             aria-roledescription="sortable"
             class="sc-bXCLTC"
@@ -403,7 +767,7 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
             Item 2
           </li>
           <li
-            aria-describedby="DndDescribedBy-5"
+            aria-describedby="DndDescribedBy-7"
             aria-disabled="false"
             aria-roledescription="sortable"
             class="sc-bXCLTC"
@@ -444,7 +808,7 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
           class="sc-bXCLTC dcgcDq"
         >
           <li
-            aria-describedby="DndDescribedBy-5"
+            aria-describedby="DndDescribedBy-7"
             aria-disabled="false"
             aria-roledescription="sortable"
             class="sc-bXCLTC"
@@ -473,7 +837,7 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
           class="sc-isRoRg fOncLZ"
           data-testid="column-counter-C"
         >
-          0
+          1
         </div>
       </div>
       <div
@@ -483,20 +847,22 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
           class="sc-bXCLTC dcgcDq"
         >
           <li
-            aria-describedby="DndDescribedBy-5"
+            aria-describedby="DndDescribedBy-7"
             aria-disabled="false"
             aria-roledescription="sortable"
             class="sc-bXCLTC"
             role="button"
             style=""
             tabindex="0"
-          />
+          >
+            Item 4
+          </li>
         </ul>
       </div>
     </div>
   </div>
   <div
-    id="DndDescribedBy-5"
+    id="DndDescribedBy-7"
     style="display: none;"
   >
     
@@ -508,7 +874,7 @@ exports[`CardOrganizer > does not call onChange when there are no changes or mou
   <div
     aria-atomic="true"
     aria-live="assertive"
-    id="DndLiveRegion-5"
+    id="DndLiveRegion-7"
     role="status"
     style="position: fixed; top: 0px; left: 0px; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%); white-space: nowrap;"
   >

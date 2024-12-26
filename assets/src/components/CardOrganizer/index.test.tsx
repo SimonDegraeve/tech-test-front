@@ -23,7 +23,7 @@ describe('CardOrganizer', () => {
         { id: 3, name: 'Item 3' },
       ],
       B: [],
-      C: [],
+      C: [{ id: 4, name: 'Item 4' }],
     },
     onChange: vi.fn().mockResolvedValue(new Promise(() => {})),
     renderCard: (item: Item) => item.name,
@@ -76,101 +76,89 @@ describe('CardOrganizer', () => {
     }
   })
 
-  test('calls onChange with the updated items when moving Up', async () => {
-    const itemName = defaultProps.items['A'][1].name
+  test.each([
+    [
+      'Up',
+      {
+        itemName: defaultProps.items['A'][1].name,
+        from: 2,
+        to: 1,
+        columns: { A: [2, 1, 3], B: [], C: [4] },
+      },
+    ],
+    [
+      'Left',
+      {
+        itemName: defaultProps.items['C'][0].name,
+        from: 4,
+        to: 1,
+        columns: { A: [1, 4, 2, 3], B: [], C: [] },
+      },
+    ],
+    [
+      'Down',
+      {
+        itemName: defaultProps.items['A'][1].name,
+        from: 2,
+        to: 1,
+        columns: { A: [2, 1, 3], B: [], C: [4] },
+      },
+    ],
+    [
+      'Right',
+      {
+        itemName: defaultProps.items['C'][0].name,
+        from: 4,
+        to: 1,
+        columns: { A: [1, 4, 2, 3], B: [], C: [] },
+      },
+    ],
+  ])(
+    'calls onChange with the updated items when moving %s',
+    async (name, { itemName, from, to, columns }) => {
+      const onChange = vi.fn().mockResolvedValue(new Promise(() => {}))
 
-    const onChange = vi.fn().mockResolvedValue(new Promise(() => {}))
+      const { getByRole, findByText, asFragment, findByRole } = render(
+        <CardOrganizer<(typeof defaultProps.columns)[number], Item>
+          {...defaultProps}
+          onChange={onChange}
+        />
+      )
 
-    const { getByRole, findByText, asFragment, findByRole } = render(
-      <CardOrganizer<(typeof defaultProps.columns)[number], Item>
-        {...defaultProps}
-        onChange={onChange}
-      />
-    )
+      // Wait for the item to be rendered
+      expect(await findByRole('button', { name: itemName })).toBeInTheDocument()
 
-    // Wait for the item to be rendered
-    expect(await findByRole('button', { name: itemName })).toBeInTheDocument()
+      // Select card
+      act(() => {
+        fireEvent.keyDown(getByRole('button', { name: itemName }), { code: 'Space' })
+      })
 
-    const card = getByRole('button', { name: itemName })
+      // Move card
+      act(() => {
+        fireEvent.keyDown(getByRole('button', { name: itemName }), { code: `Arrow${name}` })
+      })
+      await findByText(`Draggable item ${from} was moved over droppable area ${to}.`)
 
-    // Select card
-    act(() => {
-      fireEvent.keyDown(card, { code: 'Space' })
-    })
+      // Commit the change
+      act(() => {
+        fireEvent.keyDown(getByRole('button', { name: itemName }), { code: 'Space' })
+      })
+      await findByText(`Draggable item ${from} was dropped over droppable area ${to}`)
 
-    // Move card up
-    act(() => {
-      fireEvent.keyDown(card, { code: 'ArrowUp' })
-    })
-    await findByText('Draggable item 2 was moved over droppable area 1.')
+      expect(asFragment()).toMatchSnapshot()
 
-    // Commit the change
-    act(() => {
-      fireEvent.keyDown(card, { code: 'Space' })
-    })
-    await findByText('Draggable item 2 was dropped over droppable area 1')
-
-    expect(asFragment()).toMatchSnapshot()
-
-    expect(onChange).toHaveBeenNthCalledWith(1, {
-      from: expect.objectContaining({
-        id: 2,
-        sortable: expect.objectContaining({ containerId: 'A' }),
-      }),
-      to: expect.objectContaining({
-        id: 1,
-        sortable: expect.objectContaining({ containerId: 'A' }),
-      }),
-    })
-  })
-
-  test('calls onChange with the updated items when moving Down', async () => {
-    const itemName = defaultProps.items['A'][0].name
-
-    const onChange = vi.fn().mockResolvedValue(new Promise(() => {}))
-
-    const { getByRole, findByText, asFragment, findByRole } = render(
-      <CardOrganizer<(typeof defaultProps.columns)[number], Item>
-        {...defaultProps}
-        onChange={onChange}
-      />
-    )
-
-    // Wait for the item to be rendered
-    expect(await findByRole('button', { name: itemName })).toBeInTheDocument()
-
-    const card = getByRole('button', { name: itemName })
-
-    // Select card
-    act(() => {
-      fireEvent.keyDown(card, { code: 'Space' })
-    })
-
-    // Move card down
-    act(() => {
-      fireEvent.keyDown(card, { code: 'ArrowDown' })
-    })
-    await findByText('Draggable item 1 was moved over droppable area 1.')
-
-    // Commit the change
-    act(() => {
-      fireEvent.keyDown(card, { code: 'Space' })
-    })
-    await findByText('Draggable item 1 was dropped over droppable area 1')
-
-    expect(asFragment()).toMatchSnapshot()
-
-    expect(onChange).toHaveBeenNthCalledWith(1, {
-      from: expect.objectContaining({
-        id: 1,
-        sortable: expect.objectContaining({ containerId: 'A' }),
-      }),
-      to: expect.objectContaining({
-        id: 1,
-        sortable: expect.objectContaining({ containerId: 'A' }),
-      }),
-    })
-  })
+      expect(onChange).toHaveBeenNthCalledWith(1, {
+        from: expect.objectContaining({ id: from }),
+        to: expect.objectContaining({ id: to }),
+        columns: Object.fromEntries(
+          Object.entries(columns).map(([key, value]) => [
+            key,
+            value.map(id => expect.objectContaining({ id })),
+          ])
+        ),
+      })
+    }
+  )
 
   test('does not call onChange when there are no changes or mouvement is canceled', async () => {
     const itemName = defaultProps.items['A'][1].name
@@ -187,22 +175,20 @@ describe('CardOrganizer', () => {
     // Wait for the item to be rendered
     expect(await findByRole('button', { name: itemName })).toBeInTheDocument()
 
-    const card = getByRole('button', { name: itemName })
-
     // Triggers card selection
     act(() => {
-      fireEvent.keyDown(card, { code: 'Space' })
+      fireEvent.keyDown(getByRole('button', { name: itemName }), { code: 'Space' })
     })
 
     // Move card up
     await act(() => {
-      fireEvent.keyDown(card, { code: 'ArrowUp' })
+      fireEvent.keyDown(getByRole('button', { name: itemName }), { code: 'ArrowUp' })
     })
     await findByText('Draggable item 2 was moved over droppable area 1.')
 
     // Cancel the change
     act(() => {
-      fireEvent.keyDown(card, { code: 'Escape' })
+      fireEvent.keyDown(getByRole('button', { name: itemName }), { code: 'Escape' })
     })
 
     expect(asFragment()).toMatchSnapshot()

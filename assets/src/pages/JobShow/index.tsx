@@ -5,20 +5,20 @@ import { Box } from '@welcome-ui/box'
 import { Flex } from '@welcome-ui/flex'
 import {
   CandidateStatus,
-  getCandidatePosition,
+  getCandidatePositionInBetween,
   useCandidates,
   useJob,
   useUpdateCandidate,
   Candidate,
 } from '../../api'
 import CandidateCard from '../../components/Candidate'
-import CardOrganizer, { ColumnUpdate } from '../../components/CardOrganizer'
+import CardOrganizer from '../../components/CardOrganizer'
+import { ColumnUpdate } from '../../components/CardOrganizer/helpers'
 
 const candidateStatusColumns: CandidateStatus[] = ['new', 'interview', 'hired', 'rejected']
 
 function JobShow() {
   const { jobId } = useParams()
-
   const { job } = useJob(jobId)
   const { candidates } = useCandidates(jobId)
   const { mutateAsync: updateCandidate } = useUpdateCandidate(jobId)
@@ -34,7 +34,7 @@ function JobShow() {
     )
   }, [candidates])
 
-  const onChange = async ({ from, to }: ColumnUpdate<CandidateStatus, Candidate>) => {
+  const onChange = async ({ from, to, columns }: ColumnUpdate<CandidateStatus, Candidate>) => {
     const newCandidateStatus = to.sortable.containerId
 
     const currentCandidate = Object.values(candidates ?? {})
@@ -48,22 +48,10 @@ function JobShow() {
       return
     }
 
-    // Get the candidates of the new column
-    const columnCandidates = to.sortable.items.map(id =>
-      Object.values(candidates ?? {})
-        .find(candidates => candidates.has(id))
-        ?.get(id)
-    )
-    if (columnCandidates.some(candidate => !candidate)) {
-      return
-    }
-
-    // Calculate the new candidate position based on ascending or descending order
-    const isDescendingOrder = from.sortable.index > to.sortable.index
-    const newCandidatePosition = getCandidatePosition(
-      columnCandidates as Candidate[],
-      to.sortable.index,
-      isDescendingOrder
+    // Calculate the new candidate position based on previous and next candidate positions
+    const newCandidatePosition = getCandidatePositionInBetween(
+      columns[newCandidateStatus] ?? [],
+      from.id
     )
 
     // Mutate the candidate with the new status and position

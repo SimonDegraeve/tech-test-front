@@ -14,19 +14,23 @@ import {
   useSensors,
   DragEndEvent,
   DragStartEvent,
-  UniqueIdentifier,
 } from '@dnd-kit/core'
 import {
-  arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
   useSortable,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import {
+  applyColumnChanges,
+  ColumnUpdate,
   EmptyItemPlaceholder,
   emptyItemPlaceholderIdPrefix,
   isEmptyItemPlaceholder,
+  ItemData,
+  ItemRegistry,
+  ItemWithSortableData,
+  toCardOrganizerItem,
 } from './helpers'
 
 export type CardOrganizerProps<Column extends string, Item extends ItemData> = {
@@ -82,24 +86,13 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
     const overItem = toCardOrganizerItem<Column, Item>(over?.data.current)
 
     if (activeItem && overItem) {
+      const newColumns = applyColumnChanges(parentItems, activeItem, overItem)
+
       // Notify the parent component of the change
       onChange({
-        from: {
-          ...activeItem,
-          // Remove empty item placeholder from the items list
-          sortable: {
-            ...activeItem.sortable,
-            items: activeItem.sortable.items.filter(id => !isEmptyItemPlaceholder({ id })),
-          },
-        },
-        to: {
-          ...overItem,
-          // Remove empty item placeholder from the items list
-          sortable: {
-            ...overItem.sortable,
-            items: overItem.sortable.items.filter(id => !isEmptyItemPlaceholder({ id })),
-          },
-        },
+        from: activeItem,
+        to: overItem,
+        columns: newColumns,
       }).finally(() => {
         // Note: Could use `requestAnimationFrame` instead of `setTimeout` to wait for the next frame
         setTimeout(() => {
@@ -112,18 +105,7 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
         }, 16 /* 1 frame */)
       })
 
-      // Move the item in internal items to reflect the change
-      if (activeItem.sortable.containerId === overItem.sortable.containerId) {
-        setInternalItems(items => {
-          const oldIndex = activeItem.sortable.index
-          const newIndex = overItem.sortable.index
-          const column = activeItem.sortable.containerId
-          return {
-            ...items,
-            [column]: arrayMove(items?.[column] ?? [], oldIndex, newIndex),
-          }
-        })
-      }
+      setInternalItems(newColumns)
     } else {
       setInternalItems(undefined)
     }
@@ -137,27 +119,25 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
     const overItem = toCardOrganizerItem<Column, Item>(over?.data.current)
 
     if (activeItem && overItem) {
+      const oldIndex = activeItem.sortable.index
+      const newIndex = overItem.sortable.index
+      const fromColumn = activeItem.sortable.containerId
+      const toColumn = overItem.sortable.containerId
+
       // If the item is dragged to a different column, update the internal items
-      if (activeItem.sortable.containerId !== overItem.sortable.containerId) {
+      // to remove the item from the original column and add it to the new column
+      if (fromColumn !== toColumn) {
         setInternalItems(items => {
-          const oldIndex = activeItem.sortable.index
-          const newIndex = overItem.sortable.index
-          const fromColumn = activeItem.sortable.containerId
-          const toColumn = overItem.sortable.containerId
           const fromItems = items?.[fromColumn] ?? []
           const toItems = items?.[toColumn] ?? []
           const item = fromItems[oldIndex]
-
-          // Remove the item from the original column..
           const newFromItems = [...fromItems.slice(0, oldIndex), ...fromItems.slice(oldIndex + 1)]
-          // ...and insert it into the new column
-          const newToItems = [...toItems.slice(0, newIndex), item, ...toItems.slice(newIndex)]
-
-          return {
-            ...items,
-            [fromColumn]: newFromItems,
-            [toColumn]: newToItems,
-          }
+          const newToItems = [
+            ...toItems.slice(0, newIndex),
+            { ...item, originalContainerId: item.originalContainerId ?? fromColumn },
+            ...toItems.slice(newIndex),
+          ]
+          return { ...items, [fromColumn]: newFromItems, [toColumn]: newToItems }
         })
       }
     }
@@ -185,13 +165,13 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
         </DragOverlay>
 
         {columns.map(column => {
-          const items: (Item | EmptyItemPlaceholder<Column>)[] =
+          let items: (Item | EmptyItemPlaceholder<Column>)[] =
             internalItems?.[column] ?? parentItems[column] ?? []
 
           // Add an empty item placeholder if the column is empty,
           // this is necessary to allow dragging items to an empty column because we need somethinng to collide with
           if (!items.length) {
-            items.push({ id: `${emptyItemPlaceholderIdPrefix}-${column}` })
+            items = [{ id: `${emptyItemPlaceholderIdPrefix}-${column}` }]
           }
 
           return (
@@ -218,32 +198,6 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
 }
 
 export default CardOrganizer
-
-/**
- * CardOrganizer types and helpers
- */
-
-// Type matching non exported `AnyData` from `@dnd-kit/core`, `any` is necessary to match the type
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ItemData = { id: UniqueIdentifier; [key: string]: any }
-
-type ItemRegistry<Column extends string, Item extends ItemData> = Partial<Record<Column, Item[]>>
-
-export type ColumnUpdate<Column extends string, Item extends ItemData> = {
-  from: ItemWithSortableData<Column, Item>
-  to: ItemWithSortableData<Column, Item>
-}
-
-type ItemWithSortableData<Column extends string, Item extends ItemData> = Item & {
-  sortable: { containerId: Column; index: number; items: UniqueIdentifier[] }
-}
-
-function toCardOrganizerItem<Column extends string, Item extends ItemData>(
-  item: { [key: string]: unknown } | undefined
-) {
-  // Transforms `AnyData` from dnd-kit/core into our own more specific type
-  return item as ItemWithSortableData<Column, Item> | undefined
-}
 
 /**
  * CardColumn & MemoizedCardColumn components
@@ -327,6 +281,7 @@ const MemoizedCardColumn = memo(
     const hasSameColumn = prevColumn === nextColumn
 
     // Warning: The column will not update if the data of the items changes
+    // The comparison could be improved depending on benchmarks (ex: deep comparison)
     const hasSameItems =
       prevItems.map(({ id }) => id).join('') === nextItems.map(({ id }) => id).join('')
 

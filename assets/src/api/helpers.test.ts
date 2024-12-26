@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest'
 import { candidatePositionInterval } from './config'
-import { getCandidatePosition } from './helpers'
+import { getCandidatePositionInBetween } from './helpers'
 
-describe('getCandidatePosition', () => {
+describe('getCandidatePositionInBetween', () => {
   const candidates = [
     {
       id: 1,
@@ -30,41 +30,28 @@ describe('getCandidatePosition', () => {
     },
   ]
 
-  describe('Descending order', () => {
-    const isDescendingOrder = true
-
-    test('check first item position', async () => {
-      const result = getCandidatePosition(candidates, 0, isDescendingOrder)
-      expect(result).toBe(candidatePositionInterval / 2)
-    })
-
-    test('check middle item position', async () => {
-      const result = getCandidatePosition(candidates, 1, isDescendingOrder)
-      expect(result).toBe(candidatePositionInterval + candidatePositionInterval / 2)
-    })
-
-    test('check last item position', async () => {
-      const result = getCandidatePosition(candidates, 3, isDescendingOrder)
-      expect(result).toBe(candidatePositionInterval * 3 + candidatePositionInterval / 2)
-    })
+  test('check first candidate position', async () => {
+    const result = getCandidatePositionInBetween(candidates, 1)
+    expect(result).toBe(candidatePositionInterval)
   })
 
-  describe('Ascending order', () => {
-    const isDescendingOrder = false
+  test('check middle candidate position', async () => {
+    const result = getCandidatePositionInBetween(candidates, 2)
+    expect(result).toBe(candidatePositionInterval * 2)
+  })
 
-    test('check first item position', async () => {
-      const result = getCandidatePosition(candidates, 0, isDescendingOrder)
-      expect(result).toBe(candidatePositionInterval)
-    })
+  test('check last candidate position', async () => {
+    const result = getCandidatePositionInBetween(candidates, 4)
+    expect(result).toBe(candidatePositionInterval * 4)
+  })
 
-    test('check middle item position', async () => {
-      const result = getCandidatePosition(candidates, 1, isDescendingOrder)
-      expect(result).toBe(candidatePositionInterval * 2)
-    })
+  test('check unknwon candidate position', async () => {
+    const result = getCandidatePositionInBetween(candidates, 10)
+    expect(result).toBe(candidatePositionInterval / 2)
+  })
 
-    test('check last item position', async () => {
-      const result = getCandidatePosition(candidates, 3, isDescendingOrder)
-      expect(result).toBe(candidatePositionInterval * 3)
-    })
+  test('check unknwon candidates', async () => {
+    const result = getCandidatePositionInBetween([], 1)
+    expect(result).toBe(candidatePositionInterval / 2)
   })
 })
