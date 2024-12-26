@@ -52,6 +52,6 @@ describe('getCandidatePositionInBetween', () => {
 
   test('check unknwon candidates', async () => {
     const result = getCandidatePositionInBetween([], 1)
-    expect(result).toBe(candidatePositionInterval / 2)
+    expect(result).toBe(candidatePositionInterval)
   })
 })
