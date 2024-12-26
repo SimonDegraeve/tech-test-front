@@ -1,7 +1,6 @@
 import { describe, expect, test, vi } from 'vitest'
 import { act, fireEvent } from '@testing-library/react'
 import { UniqueIdentifier } from '@dnd-kit/core'
-
 import { render } from '../../test-utils'
 import CardOrganizer from '../../components/CardOrganizer'
 import { isEmptyItemPlaceholder } from './helpers'

@@ -1,7 +1,6 @@
+import { describe, expect, test } from 'vitest'
 import { candidatePositionInterval } from './config'
 import { getCandidatePosition } from './helpers'
-
-import { describe, expect, test } from 'vitest'
 
 describe('getCandidatePosition', () => {
   const candidates = [

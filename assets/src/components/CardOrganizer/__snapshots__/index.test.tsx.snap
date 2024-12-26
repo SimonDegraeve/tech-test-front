@@ -3,146 +3,147 @@
 exports[`CardOrganizer > calls onChange with the updated items when moving Down 1`] = `
 <DocumentFragment>
   <div
-    class="sc-bXCLTC hUbLIT"
+    class="sc-bXCLTC idgagy"
   >
     <div
-      class="sc-bXCLTC kIznID"
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-A"
     >
       <div
-        class="sc-bXCLTC jxlrbQ"
-        data-testid="column-A"
+        class="sc-bXCLTC bNzrHL"
       >
-        <div
-          class="sc-bXCLTC bNzrHL"
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
         >
-          <p
-            class="sc-dxcDKg goAqMT  wui-text"
-            color="black"
-            font-weight="600"
-          >
-            A
-          </p>
-          <div
-            class="sc-gvZAcH btjirq"
-            data-testid="column-counter-A"
-          >
-            3
-          </div>
-        </div>
+          A
+        </p>
         <div
-          class="sc-bXCLTC bzcJpH"
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-A"
         >
-          <div
-            class="sc-bXCLTC hAqWhv"
-          >
-            <div
-              aria-describedby="DndDescribedBy-4"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            >
-              Item 1
-            </div>
-            <div
-              aria-describedby="DndDescribedBy-4"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            >
-              Item 2
-            </div>
-            <div
-              aria-describedby="DndDescribedBy-4"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            >
-              Item 3
-            </div>
-          </div>
+          3
         </div>
       </div>
       <div
-        class="sc-bXCLTC jxlrbQ"
-        data-testid="column-B"
+        class="sc-bXCLTC bzcJpH"
       >
-        <div
-          class="sc-bXCLTC bNzrHL"
+        <ul
+          class="sc-bXCLTC dcgcDq"
         >
-          <p
-            class="sc-dxcDKg goAqMT  wui-text"
-            color="black"
-            font-weight="600"
+          <li
+            aria-describedby="DndDescribedBy-4"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
           >
-            B
-          </p>
-          <div
-            class="sc-gvZAcH btjirq"
-            data-testid="column-counter-B"
+            Item 1
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-4"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
           >
-            0
-          </div>
-        </div>
-        <div
-          class="sc-bXCLTC bzcJpH"
+            Item 2
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-4"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 3
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-B"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
         >
-          <div
-            class="sc-bXCLTC hAqWhv"
-          >
-            <div
-              aria-describedby="DndDescribedBy-4"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            />
-          </div>
+          B
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-B"
+        >
+          0
         </div>
       </div>
       <div
-        class="sc-bXCLTC jxlrbQ"
-        data-testid="column-C"
+        class="sc-bXCLTC bzcJpH"
       >
-        <div
-          class="sc-bXCLTC bNzrHL"
+        <ul
+          class="sc-bXCLTC dcgcDq"
         >
-          <p
-            class="sc-dxcDKg goAqMT  wui-text"
-            color="black"
-            font-weight="600"
-          >
-            C
-          </p>
-          <div
-            class="sc-gvZAcH btjirq"
-            data-testid="column-counter-C"
-          >
-            0
-          </div>
-        </div>
-        <div
-          class="sc-bXCLTC bzcJpH"
+          <li
+            aria-describedby="DndDescribedBy-4"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          />
+        </ul>
+      </div>
+    </div>
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-C"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
         >
-          <div
-            class="sc-bXCLTC hAqWhv"
-          >
-            <div
-              aria-describedby="DndDescribedBy-4"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            />
-          </div>
+          C
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-C"
+        >
+          0
         </div>
+      </div>
+      <div
+        class="sc-bXCLTC bzcJpH"
+      >
+        <ul
+          class="sc-bXCLTC dcgcDq"
+        >
+          <li
+            aria-describedby="DndDescribedBy-4"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          />
+        </ul>
       </div>
     </div>
   </div>
@@ -171,146 +172,147 @@ exports[`CardOrganizer > calls onChange with the updated items when moving Down 
 exports[`CardOrganizer > calls onChange with the updated items when moving Up 1`] = `
 <DocumentFragment>
   <div
-    class="sc-bXCLTC hUbLIT"
+    class="sc-bXCLTC idgagy"
   >
     <div
-      class="sc-bXCLTC kIznID"
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-A"
     >
       <div
-        class="sc-bXCLTC jxlrbQ"
-        data-testid="column-A"
+        class="sc-bXCLTC bNzrHL"
       >
-        <div
-          class="sc-bXCLTC bNzrHL"
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
         >
-          <p
-            class="sc-dxcDKg goAqMT  wui-text"
-            color="black"
-            font-weight="600"
-          >
-            A
-          </p>
-          <div
-            class="sc-gvZAcH btjirq"
-            data-testid="column-counter-A"
-          >
-            3
-          </div>
-        </div>
+          A
+        </p>
         <div
-          class="sc-bXCLTC bzcJpH"
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-A"
         >
-          <div
-            class="sc-bXCLTC hAqWhv"
-          >
-            <div
-              aria-describedby="DndDescribedBy-3"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            >
-              Item 2
-            </div>
-            <div
-              aria-describedby="DndDescribedBy-3"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            >
-              Item 1
-            </div>
-            <div
-              aria-describedby="DndDescribedBy-3"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            >
-              Item 3
-            </div>
-          </div>
+          3
         </div>
       </div>
       <div
-        class="sc-bXCLTC jxlrbQ"
-        data-testid="column-B"
+        class="sc-bXCLTC bzcJpH"
       >
-        <div
-          class="sc-bXCLTC bNzrHL"
+        <ul
+          class="sc-bXCLTC dcgcDq"
         >
-          <p
-            class="sc-dxcDKg goAqMT  wui-text"
-            color="black"
-            font-weight="600"
+          <li
+            aria-describedby="DndDescribedBy-3"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
           >
-            B
-          </p>
-          <div
-            class="sc-gvZAcH btjirq"
-            data-testid="column-counter-B"
+            Item 2
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-3"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
           >
-            0
-          </div>
-        </div>
-        <div
-          class="sc-bXCLTC bzcJpH"
+            Item 1
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-3"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 3
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-B"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
         >
-          <div
-            class="sc-bXCLTC hAqWhv"
-          >
-            <div
-              aria-describedby="DndDescribedBy-3"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            />
-          </div>
+          B
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-B"
+        >
+          0
         </div>
       </div>
       <div
-        class="sc-bXCLTC jxlrbQ"
-        data-testid="column-C"
+        class="sc-bXCLTC bzcJpH"
       >
-        <div
-          class="sc-bXCLTC bNzrHL"
+        <ul
+          class="sc-bXCLTC dcgcDq"
         >
-          <p
-            class="sc-dxcDKg goAqMT  wui-text"
-            color="black"
-            font-weight="600"
-          >
-            C
-          </p>
-          <div
-            class="sc-gvZAcH btjirq"
-            data-testid="column-counter-C"
-          >
-            0
-          </div>
-        </div>
-        <div
-          class="sc-bXCLTC bzcJpH"
+          <li
+            aria-describedby="DndDescribedBy-3"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          />
+        </ul>
+      </div>
+    </div>
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-C"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
         >
-          <div
-            class="sc-bXCLTC hAqWhv"
-          >
-            <div
-              aria-describedby="DndDescribedBy-3"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            />
-          </div>
+          C
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-C"
+        >
+          0
         </div>
+      </div>
+      <div
+        class="sc-bXCLTC bzcJpH"
+      >
+        <ul
+          class="sc-bXCLTC dcgcDq"
+        >
+          <li
+            aria-describedby="DndDescribedBy-3"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          />
+        </ul>
       </div>
     </div>
   </div>
@@ -339,155 +341,157 @@ exports[`CardOrganizer > calls onChange with the updated items when moving Up 1`
 exports[`CardOrganizer > does not call onChange when there are no changes or mouvement is canceled 1`] = `
 <DocumentFragment>
   <div
-    class="sc-bXCLTC hUbLIT"
+    class="sc-bXCLTC idgagy"
   >
     <div
-      class="sc-bXCLTC kIznID"
+      style="position: fixed; width: 0px; height: 0px; top: 0px; left: 0px; transform: translate3d(0px, 0px, 0) scaleX(1) scaleY(1); transition: transform 250ms ease; z-index: 999;"
     >
       <div
-        style="position: fixed; width: 0px; height: 0px; top: 0px; left: 0px; transform: translate3d(0px, 0px, 0) scaleX(1) scaleY(1); transition: transform 250ms ease; z-index: 999;"
+        class="sc-bXCLTC"
+        style="transform: rotate(3deg);"
       >
-        <div
-          style="transform: rotate(3deg);"
+        Item 2
+      </div>
+    </div>
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-A"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
         >
-          Item 2
+          A
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-A"
+        >
+          3
         </div>
       </div>
       <div
-        class="sc-bXCLTC jxlrbQ"
-        data-testid="column-A"
+        class="sc-bXCLTC bzcJpH"
       >
-        <div
-          class="sc-bXCLTC bNzrHL"
+        <ul
+          class="sc-bXCLTC dcgcDq"
         >
-          <p
-            class="sc-dxcDKg goAqMT  wui-text"
-            color="black"
-            font-weight="600"
+          <li
+            aria-describedby="DndDescribedBy-5"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style="transition: transform 200ms ease;"
+            tabindex="0"
           >
-            A
-          </p>
-          <div
-            class="sc-gvZAcH btjirq"
-            data-testid="column-counter-A"
+            Item 1
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-5"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style="transition: transform 200ms ease;"
+            tabindex="0"
           >
-            3
-          </div>
-        </div>
-        <div
-          class="sc-bXCLTC bzcJpH"
+            Item 2
+          </li>
+          <li
+            aria-describedby="DndDescribedBy-5"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          >
+            Item 3
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-B"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
         >
-          <div
-            class="sc-bXCLTC hAqWhv"
-          >
-            <div
-              aria-describedby="DndDescribedBy-5"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style="transition: transform 200ms ease;"
-              tabindex="0"
-            >
-              Item 1
-            </div>
-            <div
-              aria-describedby="DndDescribedBy-5"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style="transition: transform 200ms ease;"
-              tabindex="0"
-            >
-              Item 2
-            </div>
-            <div
-              aria-describedby="DndDescribedBy-5"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            >
-              Item 3
-            </div>
-          </div>
+          B
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-B"
+        >
+          0
         </div>
       </div>
       <div
-        class="sc-bXCLTC jxlrbQ"
-        data-testid="column-B"
+        class="sc-bXCLTC bzcJpH"
       >
-        <div
-          class="sc-bXCLTC bNzrHL"
+        <ul
+          class="sc-bXCLTC dcgcDq"
         >
-          <p
-            class="sc-dxcDKg goAqMT  wui-text"
-            color="black"
-            font-weight="600"
-          >
-            B
-          </p>
-          <div
-            class="sc-gvZAcH btjirq"
-            data-testid="column-counter-B"
-          >
-            0
-          </div>
-        </div>
-        <div
-          class="sc-bXCLTC bzcJpH"
+          <li
+            aria-describedby="DndDescribedBy-5"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          />
+        </ul>
+      </div>
+    </div>
+    <div
+      class="sc-bXCLTC jxlrbQ"
+      data-testid="column-C"
+    >
+      <div
+        class="sc-bXCLTC bNzrHL"
+      >
+        <p
+          class="sc-dWZqqJ cznMwz  wui-text"
+          color="black"
+          font-weight="600"
         >
-          <div
-            class="sc-bXCLTC hAqWhv"
-          >
-            <div
-              aria-describedby="DndDescribedBy-5"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            />
-          </div>
+          C
+        </p>
+        <div
+          class="sc-isRoRg fOncLZ"
+          data-testid="column-counter-C"
+        >
+          0
         </div>
       </div>
       <div
-        class="sc-bXCLTC jxlrbQ"
-        data-testid="column-C"
+        class="sc-bXCLTC bzcJpH"
       >
-        <div
-          class="sc-bXCLTC bNzrHL"
+        <ul
+          class="sc-bXCLTC dcgcDq"
         >
-          <p
-            class="sc-dxcDKg goAqMT  wui-text"
-            color="black"
-            font-weight="600"
-          >
-            C
-          </p>
-          <div
-            class="sc-gvZAcH btjirq"
-            data-testid="column-counter-C"
-          >
-            0
-          </div>
-        </div>
-        <div
-          class="sc-bXCLTC bzcJpH"
-        >
-          <div
-            class="sc-bXCLTC hAqWhv"
-          >
-            <div
-              aria-describedby="DndDescribedBy-5"
-              aria-disabled="false"
-              aria-roledescription="sortable"
-              role="button"
-              style=""
-              tabindex="0"
-            />
-          </div>
-        </div>
+          <li
+            aria-describedby="DndDescribedBy-5"
+            aria-disabled="false"
+            aria-roledescription="sortable"
+            class="sc-bXCLTC"
+            role="button"
+            style=""
+            tabindex="0"
+          />
+        </ul>
       </div>
     </div>
   </div>

@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+import 'vitest-canvas-mock'
 import { afterAll, afterEach, beforeAll } from 'vitest'
 import { setupServer } from 'msw/node'
 import { http, HttpResponse } from 'msw'
@@ -6,6 +7,10 @@ import { apiUrl } from '../api'
 import { jobCandidates, jobs } from './data'
 
 export const handlers = [
+  http.get(`${apiUrl}/jobs`, () => {
+    return HttpResponse.json({ data: jobs })
+  }),
+
   http.get(`${apiUrl}/jobs/:jobId`, () => {
     return HttpResponse.json({ data: jobs[0] })
   }),
@@ -23,7 +28,7 @@ export const handlers = [
   }),
 ]
 
-const server = setupServer(...handlers)
+export const server = setupServer(...handlers)
 
 // Start server before all tests
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))

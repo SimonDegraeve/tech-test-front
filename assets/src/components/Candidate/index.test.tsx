@@ -1,5 +1,4 @@
 import { expect, test } from 'vitest'
-
 import { Candidate } from '../../api'
 import { render } from '../../test-utils'
 import CandidateCard from '../../components/Candidate'
