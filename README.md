@@ -91,14 +91,15 @@ This is the file structure of the SPA:
 
 - I used [`mock-service-wortker`](https://mswjs.io/) to mock the API calls and data manipulation. This allow fine-grained control over the API responses and the ability to test edge network cases and error handling. It is more powerful than mocking `react-query`
 
+- I did not have time to implement the real-time synchronization between users, but I would have used change the `staleTime` and `refetchInterval` settings of react-query to let most of updates come from the socket connection. I tried to use the `socket.io` library to handle the WebSocket connection with the server, but I then realized I would probably need to use something like [Phoenix LiveView](https://hexdocs.pm/phoenix_live_view/js-interop.html). I am not too familiar with Elixir/Phoenix yet, I decided to focus on having a full working page for the user, before adding this bonus feature.
+
 ### Future improvements
 
 Related to the features:
 
-- Load more candidates on column scroll (load per column as the backend endpoint returns date per column)
 - Support selecting multiple cards at once
 - Virtual list rendering for card columns, so we can handle even more candidates per column efficiently
-- Get total number of candidates per status, as the backend is paginated, we would need an endpoint to get the total number of candidates and not rely on the partial number of candidates returned by the endpoint
+- Get total number of candidates per status, as the backend is paginated, we would need an endpoint to get the total number of candidates and not rely on the partial number of candidates returned by the endpoint, this is more performant.
 
 General:
 
