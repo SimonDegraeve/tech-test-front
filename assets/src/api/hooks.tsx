@@ -1,7 +1,15 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { getCandidates, getJob, getJobs, updateCandidate } from './fetchers'
-import { Candidate, CandidateStatus } from './types'
+import {
+  InfiniteData,
+  useInfiniteQuery,
+  UseInfiniteQueryResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from 'react-query'
 import { toast, Toast } from '@welcome-ui/toast'
+import { getCandidates, getCandidatesForStatus, getJob, getJobs, updateCandidate } from './fetchers'
+import { Candidate, CandidateStatus } from './types'
+import { maxCandidatesPerPage } from './config'
 
 /**
  * Registry of query keys used in the app
@@ -13,6 +21,7 @@ export const queryKeyRegistry = {
   jobs: 'jobs',
   job: (jobId: string | undefined) => ['job', jobId],
   candidates: (jobId: string | undefined) => ['candidates', jobId],
+  candidatesPerStatus: (jobId: string | undefined) => ['candidates', jobId, 'status'],
 }
 
 /**
@@ -67,7 +76,32 @@ export const useCandidates = (
   return { isLoading, error, candidates: data }
 }
 
-// USE MAP
+export const useInfiniteCandidatesForStatus = (
+  jobId?: string
+): UseInfiniteQueryResult<CandidatesResponse, unknown> => {
+  return useInfiniteQuery({
+    queryKey: queryKeyRegistry.candidates(jobId),
+    queryFn: ({ pageParam }) => {
+      return getCandidatesForStatus(jobId, pageParam?.status, pageParam?.lastPosition).then(data =>
+        Array.isArray(data)
+          ? {
+              [pageParam?.status]: new Map(data.map(candidate => [candidate.id, candidate])),
+            }
+          : Object.fromEntries(
+              Object.entries(data ?? {}).map(([status, candidates]) => [
+                status,
+                new Map(candidates.map(candidate => [candidate.id, candidate])),
+              ])
+            )
+      )
+    },
+    enabled: !!jobId,
+    refetchOnWindowFocus: false,
+    getNextPageParam: lastPage =>
+      !lastPage ||
+      Object.values(lastPage ?? {}).some(candidates => candidates.size >= maxCandidatesPerPage),
+  })
+}
 
 export const useUpdateCandidate = (jobId?: string) => {
   const queryClient = useQueryClient()
@@ -83,10 +117,14 @@ export const useUpdateCandidate = (jobId?: string) => {
       const previousCandidates = queryClient.getQueryData<CandidatesResponse>(candidatesQueryKey)
 
       // Optimistically update to the new value
-      queryClient.setQueryData<CandidatesResponse>(candidatesQueryKey, oldCandidates =>
-        Object.fromEntries(
-          Object.entries(oldCandidates ?? { [candidate.status]: [] }).map(
-            ([status, candidates]) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      queryClient.setQueryData(candidatesQueryKey, (oldCandidates: any) => ({
+        ...oldCandidates,
+        pages: oldCandidates?.pages?.map((page: undefined | CandidatesResponse) => {
+          if (!page) return page
+
+          return Object.fromEntries(
+            Object.entries(page ?? { [candidate.status]: [] }).map(([status, candidates]) => {
               let hasChanged = false
 
               if (candidates.has(candidate.id)) {
@@ -100,10 +138,10 @@ export const useUpdateCandidate = (jobId?: string) => {
               }
 
               return [status, hasChanged ? new Map(candidates) : candidates]
-            }
+            })
           )
-        )
-      )
+        }),
+      }))
 
       // Return a context object with the snapshotted value
       return { previousCandidates }
@@ -115,9 +153,9 @@ export const useUpdateCandidate = (jobId?: string) => {
       if (context?.previousCandidates) {
         queryClient.setQueryData<CandidatesResponse>(candidatesQueryKey, context.previousCandidates)
       }
+      queryClient.invalidateQueries({ queryKey: candidatesQueryKey })
 
-      console.log('---------')
-      // NOTE: should monitor the error via Sentry/Datadog or other error tracking service
+      // NOTE: should monitor/log the error via Sentry/Datadog or other error tracking service
       toast(
         <Toast.Growl variant="danger">
           <Toast.Title>Oops! An error occurred.</Toast.Title>

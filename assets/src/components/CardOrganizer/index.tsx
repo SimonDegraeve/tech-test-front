@@ -2,7 +2,9 @@ import { forwardRef, memo, ReactNode, useEffect, useRef, useState } from 'react'
 import { Text } from '@welcome-ui/text'
 import { Flex } from '@welcome-ui/flex'
 import { Badge } from '@welcome-ui/badge'
+import { Button } from '@welcome-ui/button'
 import { Box, BoxProps } from '@welcome-ui/box'
+import { useInView } from 'react-intersection-observer'
 import { CSS } from '@dnd-kit/utilities'
 import {
   closestCenter,
@@ -39,6 +41,10 @@ export type CardOrganizerProps<Column extends string, Item extends ItemData> = {
   renderCard: (item: Item) => ReactNode
   renderColumnLabel?: (column: Column, count: number) => ReactNode
   onChange: (columnUpdate: ColumnUpdate<Column, Item>) => Promise<void>
+  fetchNextPage?: (column: Column, item: Item) => void
+  hasNextPage?: boolean
+  isFetchingNextPage?: boolean
+  maxItemsCount?: number
 }
 
 function CardOrganizer<Column extends string, Item extends ItemData>({
@@ -47,6 +53,10 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
   renderCard,
   renderColumnLabel,
   onChange,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
+  maxItemsCount,
 }: CardOrganizerProps<Column, Item>) {
   const [internalActiveItem, setInternalActiveItem] = useState<
     ItemWithSortableData<Column, Item> | undefined
@@ -188,6 +198,10 @@ function CardOrganizer<Column extends string, Item extends ItemData>({
                 activeItem={internalActiveItem}
                 renderCard={renderCard}
                 renderColumnLabel={renderColumnLabel}
+                fetchNextPage={fetchNextPage}
+                hasNextPage={hasNextPage}
+                isFetchingNextPage={isFetchingNextPage}
+                maxItemsCount={maxItemsCount}
               />
             </SortableContext>
           )
@@ -203,21 +217,41 @@ export default CardOrganizer
  * CardColumn & MemoizedCardColumn components
  */
 
+type CardColumnProps<Column extends string, Item extends ItemData> = {
+  column: Column
+  items: (Item | EmptyItemPlaceholder<Column>)[]
+  activeItem: ItemWithSortableData<Column, Item> | undefined
+  renderCard: (item: Item) => ReactNode
+  renderColumnLabel?: (column: Column, count: number) => ReactNode
+  fetchNextPage?: (column: Column, item: Item) => void
+  hasNextPage?: boolean
+  isFetchingNextPage?: boolean
+  maxItemsCount?: number
+}
+
 function CardColumn<Column extends string, Item extends ItemData>({
   column,
   items,
   activeItem,
   renderCard,
   renderColumnLabel,
-}: {
-  column: Column
-  items: (Item | EmptyItemPlaceholder<Column>)[]
-  activeItem: ItemWithSortableData<Column, Item> | undefined
-  renderCard: (item: Item) => ReactNode
-  renderColumnLabel?: (column: Column, count: number) => ReactNode
-  maxColumnSize?: number
-}) {
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
+  maxItemsCount = 10,
+}: CardColumnProps<Column, Item>) {
   const itemsCount = items.filter(item => !isEmptyItemPlaceholder(item)).length
+  const itemsCountStr =
+    itemsCount >= maxItemsCount && hasNextPage ? `${itemsCount}/-` : `${itemsCount}`
+
+  const { ref: loadMoreRef, inView } = useInView()
+
+  useEffect(() => {
+    const lastItem = items[items.length - 1]
+    if (inView && lastItem && !isEmptyItemPlaceholder(lastItem)) {
+      fetchNextPage?.(column, lastItem)
+    }
+  }, [column, fetchNextPage, inView])
 
   return (
     <Flex
@@ -243,7 +277,7 @@ function CardColumn<Column extends string, Item extends ItemData>({
           </Text>
         )}
 
-        <Badge data-testid={`column-counter-${column}`}>{itemsCount}</Badge>
+        <Badge data-testid={`column-counter-${column}`}>{itemsCountStr}</Badge>
       </Flex>
 
       <Flex overflow="hidden" h="100%">
@@ -266,6 +300,27 @@ function CardColumn<Column extends string, Item extends ItemData>({
               {isEmptyItemPlaceholder(item) ? null : renderCard(item)}
             </SortableItem>
           ))}
+
+          {fetchNextPage && hasNextPage && (
+            <div>
+              <Button
+                variant="ghost"
+                margin="auto"
+                display="block"
+                mb={0}
+                ref={loadMoreRef}
+                onClick={() => {
+                  const lastItem = items[items.length - 1]
+                  if (lastItem && !isEmptyItemPlaceholder(lastItem)) {
+                    fetchNextPage(column, lastItem)
+                  }
+                }}
+                disabled={!hasNextPage || isFetchingNextPage}
+              >
+                {isFetchingNextPage ? 'Loading more...' : 'Load more'}
+              </Button>
+            </div>
+          )}
         </Flex>
       </Flex>
     </Flex>

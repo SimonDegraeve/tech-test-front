@@ -24,15 +24,17 @@ export const getCandidates = async (
 }
 
 export const getCandidatesForStatus = async (
-  jobId: string,
-  candidateStatus: CandidateStatus,
-  afterPosition: number
-): Promise<Candidate[]> => {
+  jobId?: string,
+  candidateStatus?: CandidateStatus,
+  afterPosition?: number
+): Promise<Candidate[] | Record<CandidateStatus, Candidate[]> | null> => {
   if (!jobId) return []
-  const params = new URLSearchParams([
-    ['status', candidateStatus],
-    afterPosition ? ['after_position', afterPosition.toString()] : [],
-  ])
+  const params = new URLSearchParams(
+    [
+      candidateStatus ? [['status', candidateStatus]] : [],
+      afterPosition ? [['after_position', afterPosition.toString()]] : [],
+    ].flat()
+  )
   const response = await fetch(`${apiUrl}/jobs/${jobId}/candidates?${params}`)
   const { data }: { data: Candidate[] } = await response.json()
   return data

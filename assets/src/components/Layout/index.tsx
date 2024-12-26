@@ -15,7 +15,7 @@ function Layout() {
         <Flex gap={20} alignItems="center" maxWidth={1200} margin="auto">
           <Logo w="162" />
           <Link as={RouterLink} to="/" color="neutral-70" fontWeight={600} marginLeft="auto">
-            <div> Jobs</div>
+            <div>Jobs</div>
           </Link>
         </Flex>
       </Box>

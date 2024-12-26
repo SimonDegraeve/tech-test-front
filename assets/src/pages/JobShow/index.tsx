@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { Text } from '@welcome-ui/text'
 import { Box } from '@welcome-ui/box'
@@ -6,10 +6,11 @@ import { Flex } from '@welcome-ui/flex'
 import {
   CandidateStatus,
   getCandidatePositionInBetween,
-  useCandidates,
   useJob,
   useUpdateCandidate,
   Candidate,
+  useInfiniteCandidatesForStatus,
+  maxCandidatesPerPage,
 } from '../../api'
 import CandidateCard from '../../components/Candidate'
 import CardOrganizer from '../../components/CardOrganizer'
@@ -20,7 +21,29 @@ const candidateStatusColumns: CandidateStatus[] = ['new', 'interview', 'hired', 
 function JobShow() {
   const { jobId } = useParams()
   const { job } = useJob(jobId)
-  const { candidates } = useCandidates(jobId)
+
+  const { fetchNextPage, hasNextPage, isFetchingNextPage, data } =
+    useInfiniteCandidatesForStatus(jobId)
+
+  const memoizedFetchNextPage = useCallback(
+    (status: CandidateStatus, lastCandidate: Candidate) => {
+      fetchNextPage({ pageParam: { status, lastPosition: lastCandidate?.position } })
+    },
+    [jobId]
+  )
+
+  const candidates = data?.pages?.reduce((acc, page) => {
+    return (
+      page &&
+      Object.entries(page).reduce((acc, [status, candidates]) => {
+        return {
+          ...acc,
+          [status]: new Map([...(acc[status as CandidateStatus] ?? []), ...candidates]),
+        }
+      }, acc)
+    )
+  }, {})
+
   const { mutateAsync: updateCandidate } = useUpdateCandidate(jobId)
 
   const sortedCandidates = useMemo(() => {
@@ -79,6 +102,10 @@ function JobShow() {
           items={sortedCandidates}
           onChange={onChange}
           renderCard={candidate => <CandidateCard candidate={candidate} />}
+          fetchNextPage={memoizedFetchNextPage}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          maxItemsCount={maxCandidatesPerPage}
         />
       </Flex>
     </>
